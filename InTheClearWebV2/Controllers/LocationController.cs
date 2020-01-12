@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using InTheClearWebV2.Repositories;
+using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
+using InTheClearWebV2.Repositories;
 
 namespace InTheClearWebV2.Controllers
 {
@@ -13,20 +14,21 @@ namespace InTheClearWebV2.Controllers
     [ApiController]
     public class LocationController : ControllerBase
     {
-        private readonly LocationRepository _context;
+        private LocationService service;
+   
 
         public LocationController(LocationRepository context)
         {
-            _context = context;
+            service = new LocationService(context);
+            
         }
+
 
         //POST: api/Locations
         [HttpPost]
-        public void PostLocations(Location location)
+        public void PostLocations(Location[] location)
         {
-            location.CreatedAt = DateTime.Now;
-            _context.Add(location);
-            _context.SaveChanges();
+            service.AddLocations(location);
 
         }
     }
