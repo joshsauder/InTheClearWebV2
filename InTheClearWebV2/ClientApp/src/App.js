@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
+import GoogleMap from "./components/googleMap";
+import Login from "./components/login"
+import withAuth from "./services/authService"
 
 import './custom.css'
 
@@ -12,11 +11,12 @@ export default class App extends Component {
 
   render () {
     return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
-      </Layout>
+       <BrowserRouter>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="" component={withAuth(GoogleMap)} />
+          </Switch>
+       </BrowserRouter>
     );
   }
 }
