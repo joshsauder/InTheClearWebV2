@@ -24,6 +24,7 @@ namespace InTheClearWebV2.Controllers
         [HttpPost]
         public void PostLocations(Location location)
         {
+            location.CreatedAt = DateTime.Now;
             _context.Add(location);
             _context.SaveChanges();
 
