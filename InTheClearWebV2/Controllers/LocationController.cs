@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
-using InTheClearWebV2.Repositories;
 
 namespace InTheClearWebV2.Controllers
 {
@@ -14,12 +8,12 @@ namespace InTheClearWebV2.Controllers
     [ApiController]
     public class LocationController : ControllerBase
     {
-        private LocationService service;
+        private readonly ILocationService service;
    
 
-        public LocationController(LocationRepository context)
+        public LocationController(ILocationService _service)
         {
-            service = new LocationService(context);
+            service = _service;
             
         }
 

@@ -1,4 +1,5 @@
 using InTheClearWebV2.Repositories;
+using InTheClearWebV2.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,7 @@ namespace InTheClearWebV2
         {
 
             services.AddDbContext<LocationRepository>(options => options.UseSqlServer(Configuration.GetConnectionString("InTheClearContext")));
+            services.AddTransient<ILocationService, LocationService>();
 
             services.AddControllersWithViews();
 

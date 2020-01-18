@@ -5,13 +5,13 @@ using InTheClearWebV2.Models;
 
 namespace InTheClearWebV2.Services
 {
-    public class LocationService 
+    public class LocationService : ILocationService 
     {
         private readonly LocationRepository respository;
 
-        public LocationService(LocationRepository context)
+        public LocationService(LocationRepository _respository)
         {
-            respository = context;
+            respository = _respository;
         }
 
         public void AddLocations(Location[] locations)
