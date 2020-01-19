@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using InTheClearWebV2.Models;
 using InTheClearWebV2.Repositories;
 using InTheClearWebV2.Exceptions;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace InTheClearWebV2.Services
 {
@@ -15,7 +18,7 @@ namespace InTheClearWebV2.Services
             repository = _repository;
         }
 
-        public void checkAuth(User user)
+        public void CheckAuth(User user)
         {
             throw new NotImplementedException();
         }
@@ -37,6 +40,27 @@ namespace InTheClearWebV2.Services
             }
 
             return foundUser;
+        }
+
+        private string createToken(long Id)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Need to Change"));
+
+            var signingCredentials = new SigningCredentials(securityKey, "HS256");
+            var header = new JwtHeader(signingCredentials);
+
+            var dateTimeOffset = new DateTimeOffset(DateTime.UtcNow);
+
+            var payload = new JwtPayload
+            {
+                {"iat", dateTimeOffset.ToUnixTimeSeconds() },
+                {"id", Id}
+            };
+
+            var securityToken = new JwtSecurityToken(header, payload);
+            var handler = new JwtSecurityTokenHandler();
+
+            return handler.WriteToken(securityToken);
         }
     }
 }
