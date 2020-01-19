@@ -7,7 +7,6 @@ using InTheClearWebV2.Repositories;
 using InTheClearWebV2.Exceptions;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
-using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace InTheClearWebV2.Services
