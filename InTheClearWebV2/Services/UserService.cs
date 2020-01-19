@@ -6,6 +6,9 @@ using InTheClearWebV2.Repositories;
 using InTheClearWebV2.Exceptions;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
+using System.Security.Principal;
+using System.Security.Claims;
 
 namespace InTheClearWebV2.Services
 {
@@ -42,7 +45,7 @@ namespace InTheClearWebV2.Services
             return foundUser;
         }
 
-        private string createToken(long Id)
+        private string createToken(long Id, string email)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Need to Change"));
 
@@ -54,13 +57,36 @@ namespace InTheClearWebV2.Services
             var payload = new JwtPayload
             {
                 {"iat", dateTimeOffset.ToUnixTimeSeconds() },
-                {"id", Id}
+                {"user", new Dictionary<string, string> {
+                    {"email",  email},
+                    {"id", Id.ToString() }
+                }
             };
 
             var securityToken = new JwtSecurityToken(header, payload);
             var handler = new JwtSecurityTokenHandler();
 
             return handler.WriteToken(securityToken);
+        }
+
+        private Boolean verifyToken(string authToken)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var validation = new TokenValidationParameters()
+            {
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Need to Change"))
+            };
+
+            try
+            {
+                ClaimsPrincipal tokensValid = tokenHandler.ValidateToken(authToken, validation, out SecurityToken validatedToken);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
     }
 }
