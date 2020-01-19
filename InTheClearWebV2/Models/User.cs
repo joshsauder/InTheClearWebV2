@@ -18,5 +18,6 @@ namespace InTheClearWebV2.Models
         public DateTime CreatedAt { get; set; }
         [DataType(DataType.Date)]
         public DateTime UpdatedAt { get; set; }
+        public string token { get; set; }
     }
 }

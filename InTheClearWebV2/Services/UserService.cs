@@ -42,7 +42,14 @@ namespace InTheClearWebV2.Services
                 throw new UserPasswordIncorrectException(message);
             }
 
-            return foundUser;
+            if(foundUser != null)
+            {
+                foundUser.token = createToken(foundUser.Id, foundUser.Email);
+                return user;
+            }else
+            {
+                return null;
+            }
         }
 
         private string createToken(long Id, string email)
@@ -69,24 +76,5 @@ namespace InTheClearWebV2.Services
             return handler.WriteToken(securityToken);
         }
 
-        private Boolean verifyToken(string authToken)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var validation = new TokenValidationParameters()
-            {
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Need to Change"))
-            };
-
-            try
-            {
-                ClaimsPrincipal tokensValid = tokenHandler.ValidateToken(authToken, validation, out SecurityToken validatedToken);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            
-        }
     }
 }

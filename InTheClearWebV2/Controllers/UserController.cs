@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
 using InTheClearWebV2.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InTheClearWebV2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService service;
@@ -21,26 +23,30 @@ namespace InTheClearWebV2.Controllers
 
         [HttpPost]
         [Route("")]
-        public void CreateUser(User user)
+        [Authorize]
+        public IActionResult CreateUser(User user)
         {
-            service.CreateUser(user);
+            return Ok()
 
         }
 
         [HttpPost]
         [Route("Auth")]
-        public async Task<ActionResult<User>> FindUser(User user)
+        [AllowAnonymous]
+        public IActionResult FindUser(User user)
         {
             try
             {
-                var found = service.FindUser(user);
+                var token = service.FindUser(user);
 
-                if (found == null)
+                if (token == null)
                 {
                     return NotFound();
                 }
 
-                return found;
+                return Ok(user);
+
+                
             } catch (UserPasswordIncorrectException e)
             {
                 return Unauthorized(e.Message);
