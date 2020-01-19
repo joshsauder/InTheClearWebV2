@@ -21,6 +21,13 @@ namespace InTheClearWebV2.Controllers
             service = _service;
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult checkAuth()
+        {
+            return Ok();
+        }
+
         [HttpPost]
         [Route("")]
         public void CreateUser(User user)

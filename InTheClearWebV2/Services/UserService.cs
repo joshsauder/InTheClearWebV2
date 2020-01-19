@@ -8,6 +8,7 @@ using InTheClearWebV2.Exceptions;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace InTheClearWebV2.Services
 {
@@ -20,15 +21,6 @@ namespace InTheClearWebV2.Services
             repository = _repository;
         }
 
-        public void CheckAuth(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void checkAuth(User user)
-        {
-            throw new NotImplementedException();
-        }
 
         public void CreateUser(User user)
         {
@@ -58,27 +50,20 @@ namespace InTheClearWebV2.Services
 
         private string createToken(long Id, string email)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Need_to_change_to_something_much_larger"));
-
-            var signingCredentials = new SigningCredentials(securityKey, "HS256");
-            var header = new JwtHeader(signingCredentials);
-
-            var dateTimeOffset = new DateTimeOffset(DateTime.UtcNow);
-
-            var payload = new JwtPayload
+            // authentication successful so generate jwt token
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("Need_to_change_to_something_much_larger");
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                {"iat", dateTimeOffset.ToUnixTimeSeconds() },
-                {"user", new Dictionary<string, string> {
-                    {"email",  email},
-                    {"id", Id.ToString() }
-                }
-                }
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, Id.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
-
-            var securityToken = new JwtSecurityToken(header, payload);
-            var handler = new JwtSecurityTokenHandler();
-
-            return handler.WriteToken(securityToken);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
 
         private UserResponse fromUserToResponse(User user, string token)
