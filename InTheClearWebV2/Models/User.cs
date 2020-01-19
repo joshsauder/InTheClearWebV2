@@ -8,16 +8,18 @@ namespace InTheClearWebV2.Models
     public class User
     {
         public long Id { get; set; }
-        public String FirstName { get; set; }
-        public String LastName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         [Required]
-        public String Email { get; set; }
+        public string Email { get; set; }
         [Required]
-        public String Password { get; set; }
+        public string Password { get; set; }
         [DataType(DataType.Date)]
         public DateTime CreatedAt { get; set; }
         [DataType(DataType.Date)]
         public DateTime UpdatedAt { get; set; }
-        public string token { get; set; }
+
+        [NotMapped]
+        public string Token { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
-
+using System.Text;
 
 namespace InTheClearWebV2
 {
@@ -47,7 +47,7 @@ namespace InTheClearWebV2
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey("Need key"),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Need_to_change_to_something_much_larger")),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
@@ -90,10 +90,9 @@ namespace InTheClearWebV2
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseAuthentication();
-
             app.UseRouting();
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

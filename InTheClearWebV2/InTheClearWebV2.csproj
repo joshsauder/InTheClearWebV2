@@ -37,6 +37,7 @@
     <Folder Include="Repositories\" />
     <Folder Include="Services\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="ViewModal\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Repository\LocationRepository.cs" />

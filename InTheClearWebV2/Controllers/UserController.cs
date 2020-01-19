@@ -23,28 +23,27 @@ namespace InTheClearWebV2.Controllers
 
         [HttpPost]
         [Route("")]
-        [Authorize]
-        public IActionResult CreateUser(User user)
+        public void CreateUser(User user)
         {
-            return Ok()
+            service.CreateUser(user);
 
         }
 
         [HttpPost]
         [Route("Auth")]
         [AllowAnonymous]
-        public IActionResult FindUser(User user)
+        public  IActionResult FindUser(User user)
         {
             try
             {
-                var token = service.FindUser(user);
+                var userResponse = service.FindUser(user);
 
-                if (token == null)
+                if (userResponse == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(user);
+                return Ok(userResponse);
 
                 
             } catch (UserPasswordIncorrectException e)

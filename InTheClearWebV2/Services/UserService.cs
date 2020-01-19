@@ -2,13 +2,12 @@
 using System.Linq;
 using System.Text;
 using InTheClearWebV2.Models;
+using InTheClearWebV2.ViewModal;
 using InTheClearWebV2.Repositories;
 using InTheClearWebV2.Exceptions;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
-using System.Security.Principal;
-using System.Security.Claims;
 
 namespace InTheClearWebV2.Services
 {
@@ -26,13 +25,18 @@ namespace InTheClearWebV2.Services
             throw new NotImplementedException();
         }
 
+        public void checkAuth(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateUser(User user)
         {
             repository.Add(user);
             repository.SaveChanges();
         }
 
-        public User FindUser(User user)
+        public UserResponse FindUser(User user)
         {
             var foundUser = repository.users.Single(temp => temp.Email == user.Email);
 
@@ -44,8 +48,8 @@ namespace InTheClearWebV2.Services
 
             if(foundUser != null)
             {
-                foundUser.token = createToken(foundUser.Id, foundUser.Email);
-                return user;
+                var token = createToken(foundUser.Id, foundUser.Email);
+                return fromUserToResponse(foundUser, token);
             }else
             {
                 return null;
@@ -54,7 +58,7 @@ namespace InTheClearWebV2.Services
 
         private string createToken(long Id, string email)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Need to Change"));
+            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Need_to_change_to_something_much_larger"));
 
             var signingCredentials = new SigningCredentials(securityKey, "HS256");
             var header = new JwtHeader(signingCredentials);
@@ -68,12 +72,28 @@ namespace InTheClearWebV2.Services
                     {"email",  email},
                     {"id", Id.ToString() }
                 }
+                }
             };
 
             var securityToken = new JwtSecurityToken(header, payload);
             var handler = new JwtSecurityTokenHandler();
 
             return handler.WriteToken(securityToken);
+        }
+
+        private UserResponse fromUserToResponse(User user, string token)
+        {
+            return new UserResponse()
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                CreatedAt = user.CreatedAt,
+                UpdatedAt = user.UpdatedAt,
+                Token = token
+            };
+            
         }
 
     }
