@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace InTheClearWebV2
 {
@@ -25,9 +26,16 @@ namespace InTheClearWebV2
         {
 
             services.AddDbContext<LocationRepository>(options => options.UseSqlServer(Configuration.GetConnectionString("InTheClearContext")));
+            services.AddDbContext<UserRepository>(options => options.UseSqlServer(Configuration.GetConnectionString("InTheClearContext")));
             services.AddTransient<ILocationService, LocationService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddControllersWithViews();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "In The Clear", Version = "v1" });
+            });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -49,6 +57,13 @@ namespace InTheClearWebV2
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -11,6 +11,7 @@ namespace InTheClearWebV2.Repositories
             Database.EnsureCreated();
         }
 
-        public DbSet<User> locations { get; set; }
+        public DbSet<User> users { get; set; }
+
     }
 }
