@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../../style/TripStops.css'
 import 'flatpickr/dist/themes/material_green.css'
 import arrayMove from 'array-move';
-import axios from '../../../../server/node_modules/axios';
+import axios from 'axios';
 import TripStopsModal from './TripStopsModal';
 import RouteDataView from './RouteDataView';
 
