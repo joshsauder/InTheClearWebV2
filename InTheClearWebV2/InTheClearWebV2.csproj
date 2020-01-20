@@ -37,6 +37,7 @@
     <Content Remove="Views\Location\Create.cshtml" />
     <Content Remove="Views\Location\Index.cshtml" />
     <Content Remove="Views\Location\Details.cshtml" />
+    <None Include="**/*" />
   </ItemGroup>
 
   <ItemGroup>
