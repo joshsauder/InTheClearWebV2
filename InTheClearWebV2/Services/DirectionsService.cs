@@ -19,6 +19,7 @@ namespace InTheClearWebV2.Services
 
         public async Task<Dictionary<string, string>> processDirections(string start, string end)
         {
+            var key = Environment.GetEnvironmentVariable("GOOGLE_MAPS_KEY");
             var url = $"https://maps.googleapis.com/maps/api/directions/json?origin={start}&destination={end}&mode=driving&key={key}";
 
             var googleResponse = await client.GetStringAsync(url);
@@ -53,6 +54,8 @@ namespace InTheClearWebV2.Services
 
         public async Task<List<Dictionary<string, string>>> processTripTimes(Route[] route)
         {
+            var appId = Environment.GetEnvironmentVariable("HERE_APP_ID");
+            var appCode = Environment.GetEnvironmentVariable("HERE_APP_CODE");
             var url = "https://route.api.here.com/routing/7.2/calculateroute.json?";
 
             for(int i = 0; i< route.Length; i++)
@@ -60,7 +63,7 @@ namespace InTheClearWebV2.Services
                 url += $"waypoint{i}=${route[i].Lat}%2C${route[i].Long}&";
             }
 
-            url += $"mode=fastest;car&app_id={process.env.HERE_APPID}&app_code={process.env.HERE_APPCODE}";
+            url += $"mode=fastest;car&app_id={appId}&app_code={appCode}";
 
             var timeResponse = await client.GetStringAsync(url);
 
@@ -82,7 +85,8 @@ namespace InTheClearWebV2.Services
 
         private async Task<string> processWeather(Route[] route)
         {
-            var url = $"https://{process.env.AWS_KEY}.execute-api.us-east-1.amazonaws.com/Prod/weather";
+            var key = Environment.GetEnvironmentVariable("AWS_KEY");
+            var url = $"https://{key}.execute-api.us-east-1.amazonaws.com/Prod/weather";
 
             var stringContent = new StringContent(JsonConvert.SerializeObject(route), Encoding.UTF8, "application/json");
             var weatherResponse = await client.PostAsync(url, stringContent);
@@ -95,7 +99,8 @@ namespace InTheClearWebV2.Services
 
         private async Task<string> processNames(Route[] route)
         {
-            var url = $"https://${process.env.AWS_KEY}.execute-api.us-east-1.amazonaws.com/Prod/reveresegeocode";
+            var key = Environment.GetEnvironmentVariable("AWS_KEY");
+            var url = $"https://${key}.execute-api.us-east-1.amazonaws.com/Prod/reveresegeocode";
 
             var stringContent = new StringContent(JsonConvert.SerializeObject(route), Encoding.UTF8, "application/json");
             var weatherResponse = await client.PostAsync(url, stringContent);
