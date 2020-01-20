@@ -25,8 +25,6 @@ namespace InTheClearWebV2.Services
             var googleResponse = await client.GetStringAsync(url);
 
             var content = JsonConvert.DeserializeObject<dynamic>(googleResponse);
-            Console.WriteLine(content.routes[0].overview_polyline.points);
-            Console.WriteLine(content.routes[0].legs[0].steps);
 
             var response = new Dictionary<string, string>
             {
@@ -43,10 +41,12 @@ namespace InTheClearWebV2.Services
                 { "List", route}
             };
 
-            Task<string> weather = processWeather(request);
-            Task<string> names = processNames(request);
+            var stringContent = new StringContent(JsonConvert.SerializeObject(route), Encoding.UTF8, "application/json");
+
+            Task<string> weather = processWeather(stringContent);
+            Task<string> names = processNames(stringContent);
  
-            var results = await Task.WhenAll(weather, names);
+            await Task.WhenAll(weather, names);
 
             var response = new Dictionary<string, string>
             {
@@ -89,14 +89,12 @@ namespace InTheClearWebV2.Services
 
         }
 
-        private async Task<string> processWeather(Dictionary<string, Route[]> route)
+        private async Task<string> processWeather(StringContent route)
         {
             var key = Environment.GetEnvironmentVariable("AWS_KEY");
             var url = $"https://{key}.execute-api.us-east-1.amazonaws.com/Prod/weather";
-            Console.WriteLine(JsonConvert.SerializeObject(route));
 
-            var stringContent = new StringContent(JsonConvert.SerializeObject(route), Encoding.UTF8, "application/json");
-            var weatherResponse = await client.PostAsync(url, stringContent);
+            var weatherResponse = await client.PostAsync(url, route);
 
             var contents = weatherResponse.Content.ReadAsStringAsync().Result;
 
@@ -104,13 +102,12 @@ namespace InTheClearWebV2.Services
 
         }
 
-        private async Task<string> processNames(Dictionary<string, Route[]> route)
+        private async Task<string> processNames(StringContent route)
         {
             var key = Environment.GetEnvironmentVariable("AWS_KEY");
             var url = $"https://{key}.execute-api.us-east-1.amazonaws.com/Prod/reveresegeocode";
 
-            var stringContent = new StringContent(JsonConvert.SerializeObject(route), Encoding.UTF8, "application/json");
-            var weatherResponse = await client.PostAsync(url, stringContent);
+            var weatherResponse = await client.PostAsync(url, route);
 
             var contents = weatherResponse.Content.ReadAsStringAsync().Result;
 
