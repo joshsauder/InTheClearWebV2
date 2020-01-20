@@ -17,8 +17,10 @@ namespace InTheClearWebV2.Services
         public void AddLocations(Location[] locations)
         {
             var postLocations = new List<Location>();
+            var guid = Guid.NewGuid();
             foreach(var location in locations)
             {
+                location.TripId = guid;
                 location.CreatedAt = DateTime.Now;
                 postLocations.Add(location);
             }

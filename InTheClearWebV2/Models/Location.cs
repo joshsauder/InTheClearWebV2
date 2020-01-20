@@ -8,6 +8,7 @@ namespace InTheClearWebV2.Models
     public class Location
     {
         public long Id { get; set; }
+        public Guid TripId { get; set; }
         [Required]
         public String City { get; set; }
         public String Condition { get; set; }

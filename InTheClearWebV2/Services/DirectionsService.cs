@@ -41,7 +41,7 @@ namespace InTheClearWebV2.Services
                 { "List", route}
             };
 
-            var stringContent = new StringContent(JsonConvert.SerializeObject(route), Encoding.UTF8, "application/json");
+            var stringContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
             Task<string> weather = processWeather(stringContent);
             Task<string> names = processNames(stringContent);
