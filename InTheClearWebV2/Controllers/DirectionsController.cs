@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
+using InTheClearWebV2.Models;
 
 namespace InTheClearWebV2.Controllers
 {
@@ -19,15 +20,17 @@ namespace InTheClearWebV2.Controllers
 
         }
 
+        [HttpGet]
         public async Task<Dictionary<string, string>> getDirections(string start, string end)
         {
             return await service.processDirections(start, end);
 
         }
 
-        public ActionResult getCityNamesAndWeather()
+        [HttpPost]
+        public async Task<Dictionary<string, string>> getCityNamesAndWeather(Route[] route)
         {
-
+            return await service.processNamesAndWeather(route);
         }
 
         public ActionResult getTripTimes()

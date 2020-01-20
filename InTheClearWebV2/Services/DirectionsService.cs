@@ -4,6 +4,8 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using InTheClearWebV2.Models;
+using System.Text;
 
 namespace InTheClearWebV2.Services
 {
@@ -32,14 +34,52 @@ namespace InTheClearWebV2.Services
             return response;
         }
 
-        public ActionResult processGeoCoordinates()
+        public async Task<Dictionary<string, string>> processNamesAndWeather(Route[] route)
         {
-            throw new NotImplementedException();
+            Task<string> weather = processWeather(route);
+            Task<string> names = processNames(route);
+
+            var results = await Task.WhenAll(weather, names);
+
+            var response = new Dictionary<string, string>
+            {
+                {"weather", await weather },
+                {"locations", await names }
+            };
+
+            return response;
+            
         }
 
         public ActionResult processTripTimes()
         {
             throw new NotImplementedException();
+        }
+
+        private async Task<string> processWeather(Route[] route)
+        {
+            var url = $"https://{process.env.AWS_KEY}.execute-api.us-east-1.amazonaws.com/Prod/weather";
+
+            var stringContent = new StringContent(JsonConvert.SerializeObject(route), Encoding.UTF8, "application/json");
+            var weatherResponse = await client.PostAsync(url, stringContent);
+
+            var contents = weatherResponse.Content.ReadAsStringAsync().Result;
+
+            return contents;
+
+        }
+
+        private async Task<string> processNames(Route[] route)
+        {
+            var url = $"https://${process.env.AWS_KEY}.execute-api.us-east-1.amazonaws.com/Prod/reveresegeocode";
+
+            var stringContent = new StringContent(JsonConvert.SerializeObject(route), Encoding.UTF8, "application/json");
+            var weatherResponse = await client.PostAsync(url, stringContent);
+
+            var contents = weatherResponse.Content.ReadAsStringAsync().Result;
+
+            return contents;
+
         }
     }
 }
