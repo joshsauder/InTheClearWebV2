@@ -33,9 +33,11 @@ namespace InTheClearWebV2.Controllers
             return await service.processNamesAndWeather(route);
         }
 
-        public ActionResult getTripTimes()
+        [HttpPost]
+        public async Task<List<Dictionary<string, string>>> getTripTimes(Route[] route)
         {
 
+            return await service.processTripTimes(route);
         }
 
         private

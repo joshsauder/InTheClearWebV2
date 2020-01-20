@@ -10,6 +10,6 @@ namespace InTheClearWebV2.Services
     {
         public Task<Dictionary<string, string>> processDirections(string start, string end);
         public Task<Dictionary<string, string>> processNamesAndWeather(Route[] route);
-        public ActionResult processTripTimes();
+        public Task<List<Dictionary<string, string>>> processTripTimes(Route[] route);
     }
 }

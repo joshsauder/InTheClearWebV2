@@ -51,9 +51,33 @@ namespace InTheClearWebV2.Services
             
         }
 
-        public ActionResult processTripTimes()
+        public async Task<List<Dictionary<string, string>>> processTripTimes(Route[] route)
         {
-            throw new NotImplementedException();
+            var url = "https://route.api.here.com/routing/7.2/calculateroute.json?";
+
+            for(int i = 0; i< route.Length; i++)
+            {
+                url += $"waypoint{i}=${route[i].Lat}%2C${route[i].Long}&";
+            }
+
+            url += $"mode=fastest;car&app_id={process.env.HERE_APPID}&app_code={process.env.HERE_APPCODE}";
+
+            var timeResponse = await client.GetStringAsync(url);
+
+            var content = JsonConvert.DeserializeObject<dynamic>(timeResponse);
+
+            var response = new List<Dictionary<string, string>>();
+            foreach (var item in content.route[0].leg)
+            {
+                var responseItem = new Dictionary<string, string>();
+                responseItem.Add("pos", item.start.mappedPosition);
+                responseItem.Add("time", item.travelTime);
+
+                response.Add(responseItem);
+            }
+
+            return response;
+
         }
 
         private async Task<string> processWeather(Route[] route)
