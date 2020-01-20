@@ -16,7 +16,7 @@ export default function withAuth(AuthComponent){
         }
 
         componentDidMount() {
-            Axios.get('/api/user/auth', {withCredentials: true})
+            Axios.get('/api/User/Auth', {withCredentials: true})
             .then(res=> {
                 if(res.status === 200){
                     this.setState({loading: false, id: res.data.id, name: res.data.name})

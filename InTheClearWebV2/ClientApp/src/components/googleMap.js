@@ -107,7 +107,7 @@ class GoogleMap extends PolylineGenerator {
             userId: this.props.userId
           }
         })
-        Axios.post('/api/locations', data).catch(err => {
+        Axios.post('/api/Locations', data).catch(err => {
           console.log(err)
         })
       }

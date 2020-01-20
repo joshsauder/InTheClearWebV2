@@ -54,6 +54,11 @@
     <Compile Remove="WeatherForecast.cs" />
     <Compile Remove="ViewModal\WeatherResponse.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="ClientApp\src\custom.css" />
+    <None Remove="ClientApp\src\registerServiceWorker.js" />
+    <None Remove="ClientApp\src\images\InTheClear.png" />
+  </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

@@ -61,7 +61,7 @@ class TripStopsContainer extends Component {
 
     getTravelTimes = () => {
         //get travel times
-        axios.post("/api/directions/tripTimes", [this.props.start, ...this.state.stops, this.props.end])
+        axios.post("/api/Directions/Times", [this.props.start, ...this.state.stops, this.props.end])
         .then(res => {
             const times = res.data.map(time => {
                 return time.time

@@ -9,7 +9,7 @@ class UserInfo extends Component {
     }
 
     deleteCookie = () => {
-        axios.get('/api/user/auth/logout').then(()=> {
+        axios.get('/api/User/Auth/Logout').then(()=> {
             window.location.reload()
         })
     }
