@@ -1,10 +1,15 @@
 ﻿using System;
+using Newtonsoft.Json;
+
 namespace InTheClearWebV2.Models
 {
     public class Route
     {
-        public string Lat { get; set; }
-        public string Long {get; set; }
-        public DateTime Time { get; set; }
+        [JsonProperty(PropertyName = "lat")]
+        public double Lat { get; set; }
+        [JsonProperty(PropertyName = "long")]
+        public double Long {get; set; }
+        [JsonProperty(PropertyName = "time")]
+        public int Time { get; set; }
     }
 }

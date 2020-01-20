@@ -25,11 +25,13 @@ namespace InTheClearWebV2.Services
             var googleResponse = await client.GetStringAsync(url);
 
             var content = JsonConvert.DeserializeObject<dynamic>(googleResponse);
+            Console.WriteLine(content.routes[0].overview_polyline.points);
+            Console.WriteLine(content.routes[0].legs[0].steps);
 
             var response = new Dictionary<string, string>
             {
-                {"points", content.routes[0].overview_polyline.points},
-                {"steps", content.routes[0].legs[0].steps}
+                {"points", JsonConvert.ToString(content.routes[0].overview_polyline.points)},
+                {"steps", JsonConvert.ToString(content.routes[0].legs[0].steps)}
             };
 
             return response;
@@ -37,9 +39,13 @@ namespace InTheClearWebV2.Services
 
         public async Task<Dictionary<string, string>> processNamesAndWeather(Route[] route)
         {
-            Task<string> weather = processWeather(route);
-            Task<string> names = processNames(route);
+            var request = new Dictionary<string, Route[]>{
+                { "List", route}
+            };
 
+            Task<string> weather = processWeather(request);
+            Task<string> names = processNames(request);
+ 
             var results = await Task.WhenAll(weather, names);
 
             var response = new Dictionary<string, string>
@@ -83,10 +89,11 @@ namespace InTheClearWebV2.Services
 
         }
 
-        private async Task<string> processWeather(Route[] route)
+        private async Task<string> processWeather(Dictionary<string, Route[]> route)
         {
             var key = Environment.GetEnvironmentVariable("AWS_KEY");
             var url = $"https://{key}.execute-api.us-east-1.amazonaws.com/Prod/weather";
+            Console.WriteLine(JsonConvert.SerializeObject(route));
 
             var stringContent = new StringContent(JsonConvert.SerializeObject(route), Encoding.UTF8, "application/json");
             var weatherResponse = await client.PostAsync(url, stringContent);
@@ -97,10 +104,10 @@ namespace InTheClearWebV2.Services
 
         }
 
-        private async Task<string> processNames(Route[] route)
+        private async Task<string> processNames(Dictionary<string, Route[]> route)
         {
             var key = Environment.GetEnvironmentVariable("AWS_KEY");
-            var url = $"https://${key}.execute-api.us-east-1.amazonaws.com/Prod/reveresegeocode";
+            var url = $"https://{key}.execute-api.us-east-1.amazonaws.com/Prod/reveresegeocode";
 
             var stringContent = new StringContent(JsonConvert.SerializeObject(route), Encoding.UTF8, "application/json");
             var weatherResponse = await client.PostAsync(url, stringContent);

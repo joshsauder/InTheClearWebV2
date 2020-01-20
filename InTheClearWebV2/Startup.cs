@@ -32,6 +32,7 @@ namespace InTheClearWebV2
             services.AddDbContext<UserRepository>(options => options.UseSqlServer(Configuration.GetConnectionString("InTheClearContext")));
             services.AddTransient<ILocationService, LocationService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IDirectionsService, DirectionsService>();
 
             services.AddControllersWithViews();
 

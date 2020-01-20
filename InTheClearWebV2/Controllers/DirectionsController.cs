@@ -28,18 +28,19 @@ namespace InTheClearWebV2.Controllers
         }
 
         [HttpPost]
+        [Route("Info")]
         public async Task<Dictionary<string, string>> getCityNamesAndWeather(Route[] route)
         {
             return await service.processNamesAndWeather(route);
         }
 
         [HttpPost]
+        [Route("Times")]
         public async Task<List<Dictionary<string, string>>> getTripTimes(Route[] route)
         {
 
             return await service.processTripTimes(route);
         }
 
-        private
     }
 }
