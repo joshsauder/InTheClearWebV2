@@ -94,11 +94,7 @@ namespace InTheClearWebV2.Services
             var key = Environment.GetEnvironmentVariable("AWS_KEY");
             var url = $"https://{key}.execute-api.us-east-1.amazonaws.com/Prod/weather";
 
-            var weatherResponse = await client.PostAsync(url, route);
-
-            var contents = weatherResponse.Content.ReadAsStringAsync().Result;
-
-            return contents;
+            return await lambdaRequest(route, url);
 
         }
 
@@ -107,12 +103,16 @@ namespace InTheClearWebV2.Services
             var key = Environment.GetEnvironmentVariable("AWS_KEY");
             var url = $"https://{key}.execute-api.us-east-1.amazonaws.com/Prod/reveresegeocode";
 
-            var weatherResponse = await client.PostAsync(url, route);
+            return await lambdaRequest(route, url);
 
+        }
+
+        private async Task<string> lambdaRequest(StringContent route, string url)
+        {
+            var weatherResponse = await client.PostAsync(url, route);
             var contents = weatherResponse.Content.ReadAsStringAsync().Result;
 
             return contents;
-
         }
     }
 }
