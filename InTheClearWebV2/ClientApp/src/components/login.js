@@ -77,7 +77,7 @@ class Login extends Component {
             email: this.state.email
         }
 
-        Axios.post('/api/u]User', userObj)
+        Axios.post('/api/User', userObj)
         .then(res => {
             if(res.status == 200){
                 //show login form

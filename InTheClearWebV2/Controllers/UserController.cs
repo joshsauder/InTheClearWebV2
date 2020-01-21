@@ -1,11 +1,11 @@
 using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
 using InTheClearWebV2.Exceptions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace InTheClearWebV2.Controllers
 {
@@ -30,6 +30,7 @@ namespace InTheClearWebV2.Controllers
 
         [HttpPost]
         [Route("")]
+        [AllowAnonymous]
         public void CreateUser(User user)
         {
             service.CreateUser(user);
@@ -50,6 +51,7 @@ namespace InTheClearWebV2.Controllers
                     return NotFound();
                 }
 
+                this.Response.Headers.Add("Authorization", "bearer " + userResponse.Token);
                 return Ok(userResponse);
 
                 
