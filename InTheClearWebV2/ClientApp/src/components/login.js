@@ -58,6 +58,8 @@ class Login extends Component {
         .then(res => {
             if(res.status == 200){
                 //go to main page since access is granted
+                Axios.defaults.headers.common["Authorization"] = "bearer " + res.data.token
+                console.log("bearer " + res.data.token)
                 this.props.history.push('/')
             }
         }).catch(err => {
