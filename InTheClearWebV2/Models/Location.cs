@@ -8,12 +8,13 @@ namespace InTheClearWebV2.Models
     public class Location
     {
         public long Id { get; set; }
+        [Required]
         public Guid TripId { get; set; }
+        [Required]
+        public int UserId { get; set; }
         [Required]
         public String City { get; set; }
         public String Condition { get; set; }
-        [Required]
-        public int UserId { get; set; }
         [DataType(DataType.Date)]
         public DateTime CreatedAt { get; set; }
     }

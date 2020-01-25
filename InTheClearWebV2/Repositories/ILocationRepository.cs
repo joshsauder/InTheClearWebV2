@@ -4,7 +4,7 @@ using InTheClearWebV2.Models;
 
 namespace InTheClearWebV2.Repositories
 {
-    public interface ILocationReposity
+    public interface ILocationRepository
     {
         public void AddLocations(Location[] locations);
         public List<Location> GetTrip(int UserId, Guid tripId);

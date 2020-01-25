@@ -7,9 +7,9 @@ namespace InTheClearWebV2.Services
 {
     public class LocationService : ILocationService 
     {
-        private readonly LocationRepository respository;
+        private readonly ILocationRepository respository;
 
-        public LocationService(LocationRepository _respository)
+        public LocationService(ILocationRepository _respository)
         {
             respository = _respository;
         }

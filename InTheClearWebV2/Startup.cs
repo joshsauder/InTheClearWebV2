@@ -3,7 +3,6 @@ using InTheClearWebV2.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,12 +29,11 @@ namespace InTheClearWebV2
 
             services.AddDbContext<EntityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("InTheClearContext")));
 
-            services.AddScoped<EntityContext>();
-            services.AddScoped<ILocationService>();
-            services.AddScoped<ILocationReposity>();
-            services.AddScoped<IUserService>();
-            services.AddScoped<IUserRepository>();
-            services.AddSingleton<IDirectionsService>();
+            services.AddTransient<ILocationRepository, LocationRepository>();
+            services.AddTransient<ILocationService, LocationService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddSingleton<IDirectionsService, DirectionsService>();
 
             services.AddControllersWithViews();
 

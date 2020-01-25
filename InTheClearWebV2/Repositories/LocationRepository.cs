@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InTheClearWebV2.Repositories
 {
-    public class LocationRepository : ILocationReposity
+    public class LocationRepository : ILocationRepository
     {
 
         private readonly EntityContext context;

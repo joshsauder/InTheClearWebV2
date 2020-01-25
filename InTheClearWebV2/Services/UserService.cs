@@ -13,9 +13,9 @@ namespace InTheClearWebV2.Services
 {
     public class UserService : IUserService
     {
-        private readonly UserRepository repository;
+        private readonly IUserRepository repository;
 
-        public UserService(UserRepository _repository)
+        public UserService(IUserRepository _repository)
         {
             repository = _repository;
         }
