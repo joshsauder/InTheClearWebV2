@@ -102,9 +102,9 @@ class GoogleMap extends PolylineGenerator {
         //save each stop
         const data = tripData.map(trip => {
           return {
-            city: trip.city,
-            condition: trip.weather.Description,
-            userId: this.props.userId
+            City: trip.city,
+            Condition: trip.weather.Description,
+            UserId: this.props.userId
           }
         })
         Axios.post('/api/Locations', data).catch(err => {

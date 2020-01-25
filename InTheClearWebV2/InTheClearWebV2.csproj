@@ -30,15 +30,6 @@
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-    <Content Remove="Views\Location\Edit.cshtml" />
-    <Content Remove="Pages\_ViewImports.cshtml" />
-    <Content Remove="Pages\Error.cshtml" />
-    <Content Remove="Views\Location\Delete.cshtml" />
-    <Content Remove="Views\Location\Create.cshtml" />
-    <Content Remove="Views\Location\Index.cshtml" />
-    <Content Remove="Views\Location\Details.cshtml" />
-    <None Include="**/*" />
-    <None Include="**/*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,9 +42,6 @@
   <ItemGroup>
     <Compile Remove="Repository\LocationRepository.cs" />
     <Compile Remove="Repository\LocationRepository.cs" />
-    <Compile Remove="Pages\Error.cshtml.cs" />
-    <Compile Remove="Controllers\WeatherForecastController.cs" />
-    <Compile Remove="WeatherForecast.cs" />
     <Compile Remove="ViewModal\WeatherResponse.cs" />
   </ItemGroup>
   <ItemGroup>
