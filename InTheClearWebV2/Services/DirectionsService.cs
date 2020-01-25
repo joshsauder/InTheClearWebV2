@@ -21,15 +21,14 @@ namespace InTheClearWebV2.Services
         {
             var key = Environment.GetEnvironmentVariable("GOOGLE_MAPS_KEY");
             var url = $"https://maps.googleapis.com/maps/api/directions/json?origin={start}&destination={end}&mode=driving&key={key}";
-
             var googleResponse = await client.GetStringAsync(url);
 
             var content = JsonConvert.DeserializeObject<dynamic>(googleResponse);
 
             var response = new Dictionary<string, string>
             {
-                {"points", JsonConvert.ToString(content.routes[0].overview_polyline.points)},
-                {"steps", JsonConvert.ToString(content.routes[0].legs[0].steps)}
+                {"points", JsonConvert.SerializeObject(content.routes[0].overview_polyline.points)},
+                {"steps", JsonConvert.SerializeObject(content.routes[0].legs[0].steps)}
             };
 
             return response;

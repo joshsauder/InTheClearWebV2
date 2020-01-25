@@ -6,12 +6,12 @@ namespace InTheClearWebV2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LocationController : ControllerBase
+    public class LocationsController : ControllerBase
     {
         private readonly ILocationService service;
    
 
-        public LocationController(ILocationService _service)
+        public LocationsController(ILocationService _service)
         {
             service = _service;
             

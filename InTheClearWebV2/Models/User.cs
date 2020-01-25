@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace InTheClearWebV2.Models
 {
@@ -8,7 +9,9 @@ namespace InTheClearWebV2.Models
     public class User
     {
         public long Id { get; set; }
+        [JsonProperty(PropertyName = "firstName")]
         public string FirstName { get; set; }
+        [JsonProperty(PropertyName = "lastName")]
         public string LastName { get; set; }
         [Required]
         public string Email { get; set; }

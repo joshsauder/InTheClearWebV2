@@ -37,7 +37,7 @@ class PolylineGenerator extends Component {
         var path;
         var steps
         try {
-            const response = await axios.get(`/api/Directions/${start.lat},${start.lng}/${end.lat},${end.lng}`);
+            const response = await axios.get(`/api/Directions?start=${start.lat},${start.lng}&end=${end.lat},${end.lng}`);
             path = window.google.maps.geometry.encoding.decodePath(response.data.points);
             steps = response.data.steps;
 

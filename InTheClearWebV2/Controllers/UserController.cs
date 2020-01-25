@@ -52,6 +52,7 @@ namespace InTheClearWebV2.Controllers
                 }
 
                 this.Response.Headers.Add("Authorization", "bearer " + userResponse.Token);
+
                 return Ok(userResponse);
 
                 

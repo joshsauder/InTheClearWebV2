@@ -7,7 +7,7 @@ namespace InTheClearWebV2.Models
     {
         [JsonProperty(PropertyName = "lat")]
         public double Lat { get; set; }
-        [JsonProperty(PropertyName = "long")]
+        [JsonProperty(PropertyName = "lng")]
         public double Long {get; set; }
         [JsonProperty(PropertyName = "time")]
         public int Time { get; set; }
