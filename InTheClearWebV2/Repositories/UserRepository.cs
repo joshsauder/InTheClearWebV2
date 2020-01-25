@@ -1,17 +1,30 @@
 ﻿using System;
+using System.Linq;
 using InTheClearWebV2.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace InTheClearWebV2.Repositories
 {
-    public class UserRepository : DbContext
+    public class UserRepository : IUserRepository
     {
-        public UserRepository(DbContextOptions<UserRepository> options) : base(options)
+
+        private readonly EntityContext context;
+
+        public UserRepository(EntityContext _context)
         {
-            Database.EnsureCreated();
+            context = _context;
         }
 
-        public DbSet<User> users { get; set; }
+        public void CreateUser(User user)
+        {
+            context.Users.Add(user);
+            context.SaveChanges();
+        }
 
+        public User FindUser(string email)
+        {
+            return context.Users
+                .Single(user => user.Email == email);
+        }
     }
 }
