@@ -25,8 +25,7 @@ namespace InTheClearWebV2.Services
                 postLocations.Add(location);
             }
 
-            respository.AddRange(postLocations);
-            respository.SaveChanges();
+            respository.AddLocations(locations);
         } 
     }
 }

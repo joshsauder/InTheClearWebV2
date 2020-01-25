@@ -23,13 +23,12 @@ namespace InTheClearWebV2.Services
 
         public void CreateUser(User user)
         {
-            repository.Add(user);
-            repository.SaveChanges();
+            repository.CreateUser(user);
         }
 
         public UserResponse FindUser(User user)
         {
-            var foundUser = repository.users.Single(temp => temp.Email == user.Email);
+            var foundUser = repository.FindUser(user.Email);
 
             if (String.Compare(foundUser.Password, user.Password) < 0)
             {
