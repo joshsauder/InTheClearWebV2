@@ -28,11 +28,14 @@ namespace InTheClearWebV2
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<LocationRepository>(options => options.UseSqlServer(Configuration.GetConnectionString("InTheClearContext")));
-            services.AddDbContext<UserRepository>(options => options.UseSqlServer(Configuration.GetConnectionString("InTheClearContext")));
-            services.AddTransient<ILocationService, LocationService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IDirectionsService, DirectionsService>();
+            services.AddDbContext<EntityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("InTheClearContext")));
+
+            services.AddScoped<EntityContext>();
+            services.AddScoped<ILocationService>();
+            services.AddScoped<ILocationReposity>();
+            services.AddScoped<IUserService>();
+            services.AddScoped<IUserRepository>();
+            services.AddSingleton<IDirectionsService>();
 
             services.AddControllersWithViews();
 
