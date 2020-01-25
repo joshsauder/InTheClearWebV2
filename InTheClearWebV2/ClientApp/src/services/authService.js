@@ -16,11 +16,10 @@ export default function withAuth(AuthComponent){
         }
 
         componentDidMount() {
-            console.log(Axios.defaults.headers)
             Axios.get('/api/User', {withCredentials: true})
             .then(res=> {
                 if(res.status === 200){
-                    this.setState({loading: false, id: res.data.id, name: res.data.name})
+                    this.setState({loading: false, id: res.config.headers.UserId, name: res.config.headers.Name})
                 }else {
                     const error = new Error(res.error);
                     throw error;

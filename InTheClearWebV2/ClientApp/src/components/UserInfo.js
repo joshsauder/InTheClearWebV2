@@ -17,7 +17,7 @@ class UserInfo extends Component {
     render(){
         return (
             <div className="mr-3">
-                <div className="text-white mb-2">Hello! {this.props.name ? this.props.name.firstName : ""}</div>
+                <div className="text-white mb-2">Hello! {this.props.name ? this.props.name : ""}</div>
                 <Button onClick={this.deleteCookie}>Logout</Button>
             </div>
         )

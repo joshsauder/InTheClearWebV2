@@ -52,14 +52,14 @@ class Login extends Component {
             password: this.state.password
         }
 
-        console.log("hit")
-
         Axios.post('/api/User/Auth', loginObj, {withCredentials: true})
         .then(res => {
             if(res.status == 200){
                 //go to main page since access is granted
                 Axios.defaults.headers.common["Authorization"] = "bearer " + res.data.token
-                console.log("bearer " + res.data.token)
+                Axios.defaults.headers.common["UserId"] = res.data.id
+                Axios.defaults.headers.common["Name"] = res.data.firstName
+
                 this.props.history.push('/')
             }
         }).catch(err => {
@@ -71,10 +71,8 @@ class Login extends Component {
         event.preventDefault();
 
         const userObj = {
-            name: {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName
-            },
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
             password: this.state.password,
             email: this.state.email
         }
