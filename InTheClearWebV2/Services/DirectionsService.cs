@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -65,7 +64,7 @@ namespace InTheClearWebV2.Services
 
             for(int i = 0; i< route.Length; i++)
             {
-                url += $"waypoint{i}=${route[i].Lat}%2C${route[i].Long}&";
+                url += $"waypoint{i}={route[i].Lat}%2C{route[i].Long}&";
             }
 
             url += $"mode=fastest;car&app_id={appId}&app_code={appCode}";
@@ -75,11 +74,12 @@ namespace InTheClearWebV2.Services
             var content = JsonConvert.DeserializeObject<dynamic>(timeResponse);
 
             var response = new List<Dictionary<string, string>>();
-            foreach (var item in content.route[0].leg)
+            Console.WriteLine(content.response.route[0].leg);
+            foreach (var item in content.response.route[0].leg)
             {
                 var responseItem = new Dictionary<string, string>();
-                responseItem.Add("pos", item.start.mappedPosition);
-                responseItem.Add("time", item.travelTime);
+                responseItem.Add("pos", JsonConvert.SerializeObject(item.start.mappedPosition));
+                responseItem.Add("time", JsonConvert.SerializeObject(item.travelTime));
 
                 response.Add(responseItem);
             }
