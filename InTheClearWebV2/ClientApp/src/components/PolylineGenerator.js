@@ -38,7 +38,7 @@ class PolylineGenerator extends Component {
         var steps
         try {
             const response = await axios.get(`/api/Directions?start=${start.lat},${start.lng}&end=${end.lat},${end.lng}`);
-            path = window.google.maps.geometry.encoding.decodePath(response.data.points);
+            path = window.google.maps.geometry.encoding.decodePath(JSON.parse(response.data.points));
             steps = JSON.parse(response.data.steps);
 
             let stepObj = []
@@ -68,6 +68,7 @@ class PolylineGenerator extends Component {
 
             weather = JSON.parse(weather)
             cities = JSON.parse(cities)
+ 
 
             this.weatherPerStep(steps, path, weather, map);
             for (var i = 0; i < path.length; i++) {
@@ -134,7 +135,7 @@ class PolylineGenerator extends Component {
         let tempPath = []
         var i = index
 
-        while(Math.abs(path[i].lat() - step.end_location.lng) >= 0.2 || Math.abs(path[i].lng() - step.end_location.lat ) >= 0.2 ){
+        while(Math.abs(path[i].lat() - step.end_location.lat) >= 0.2 || Math.abs(path[i].lng() - step.end_location.lng ) >= 0.2 ){
 
             tempPath.push(path[i])
             i += 1
