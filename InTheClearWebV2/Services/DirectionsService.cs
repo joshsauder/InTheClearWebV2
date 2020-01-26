@@ -46,6 +46,8 @@ namespace InTheClearWebV2.Services
  
             await Task.WhenAll(weather, names);
 
+            Console.WriteLine(await names);
+
             var response = new Dictionary<string, string>
             {
                 {"weather", await weather },
@@ -74,7 +76,7 @@ namespace InTheClearWebV2.Services
             var content = JsonConvert.DeserializeObject<dynamic>(timeResponse);
 
             var response = new List<Dictionary<string, string>>();
-            Console.WriteLine(content.response.route[0].leg);
+            
             foreach (var item in content.response.route[0].leg)
             {
                 var responseItem = new Dictionary<string, string>();

@@ -47,7 +47,7 @@ class PolylineGenerator extends Component {
             //add initial location
             var data = {}
             data["lat"] = steps[0].start_location.lat
-            data["lng"] = steps[0].start_location.lng
+            data["long"] = steps[0].start_location.lng
             data["time"] = time
             stepObj.push(data);
 
@@ -55,7 +55,7 @@ class PolylineGenerator extends Component {
             steps.forEach(step => {
                 var data = {}
                 data["lat"] = step.end_location.lat
-                data["lng"] = step.end_location.lng
+                data["long"] = step.end_location.lng
                 time += step.duration.value
                 data["time"] = time
                 stepObj.push(data);
