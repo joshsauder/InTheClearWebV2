@@ -27,7 +27,7 @@ namespace InTheClearWebV2.Services
             var response = new Dictionary<string, string>
             {
                 {"points", JsonConvert.SerializeObject(content.routes[0].overview_polyline.points)},
-                {"steps", JsonConvert.SerializeObject(content.routes[0].legs[0].steps)}
+                {"steps", Convert.ToString(content.routes[0].legs[0].steps)}
             };
 
             return response;
@@ -45,8 +45,6 @@ namespace InTheClearWebV2.Services
             Task<string> names = processNames(stringContent);
  
             await Task.WhenAll(weather, names);
-
-            Console.WriteLine(await names);
 
             var response = new Dictionary<string, string>
             {

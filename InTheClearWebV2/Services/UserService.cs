@@ -8,6 +8,8 @@ using InTheClearWebV2.Exceptions;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Cryptography;
 
 namespace InTheClearWebV2.Services
 {
@@ -23,6 +25,10 @@ namespace InTheClearWebV2.Services
 
         public void CreateUser(User user)
         {
+            var password = generateHash(user.Password);
+            user.Password = password.Item2;
+            user.Salt = password.Item1;
+
             repository.CreateUser(user);
         }
 
@@ -30,7 +36,7 @@ namespace InTheClearWebV2.Services
         {
             var foundUser = repository.FindUser(user.Email);
 
-            if (String.Compare(foundUser.Password, user.Password) < 0)
+            if (compareHash(user.Password, foundUser.Password, foundUser.Salt))
             {
                 string message = "Password is incorrect - " + user.Password;
                 throw new UserPasswordIncorrectException(message);
@@ -77,6 +83,36 @@ namespace InTheClearWebV2.Services
                 Token = token
             };
             
+        }
+
+        private (byte[], string) generateHash(string password)
+        {
+            byte[] salt = new byte[16];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
+
+            string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+               password: password,
+               salt: salt,
+               prf: KeyDerivationPrf.HMACSHA1,
+               iterationCount: 10000,
+               numBytesRequested: 256 / 8));
+
+            return (salt, hashedPassword);
+        }
+
+        private bool compareHash(string password, string hash, byte[] salt)
+        {
+            string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+              password: password,
+              salt: salt,
+              prf: KeyDerivationPrf.HMACSHA1,
+              iterationCount: 10000,
+              numBytesRequested: 256 / 8));
+
+            return hashedPassword.Equals(hash);
         }
 
     }
