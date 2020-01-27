@@ -5,11 +5,11 @@ using InTheClearWebV2.Models;
 
 namespace InTheClearWebV2.Services
 {
-    public class LocationService : ITripService 
+    public class TripService : ITripService 
     {
         private readonly ITripRepository repository;
 
-        public LocationService(ITripRepository _repository)
+        public TripService(ITripRepository _repository)
         {
             repository = _repository;
         }
