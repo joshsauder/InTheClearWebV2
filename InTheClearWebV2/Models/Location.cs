@@ -14,6 +14,9 @@ namespace InTheClearWebV2.Models
         public String Condition { get; set; }
         public int Temperature { get; set; }
 
+        public Guid TripId { get; set; }
+
+        [ForeignKey("TripId")]
         public Trip Trip { get; set; }
     }
 }
