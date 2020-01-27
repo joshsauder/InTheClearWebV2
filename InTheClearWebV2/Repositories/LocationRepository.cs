@@ -19,16 +19,11 @@ namespace InTheClearWebV2.Repositories
         public void AddLocations(Location[] locations)
         {
             context.Locations.AddRange(locations);
-            context.SaveChanges();
         }
 
-        public List<Location> GetTrip(int UserId, Guid tripId)
+        public void Save()
         {
-            return context.Locations
-                .Where(loc => loc.TripId == tripId && loc.UserId == UserId)
-                .OrderBy(loc => loc.Id)
-                .ToList();
-              
+            context.SaveChanges();
         }
     }
 }

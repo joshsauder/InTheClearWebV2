@@ -3,8 +3,8 @@ using InTheClearWebV2.Models;
 
 namespace InTheClearWebV2.Services
 {
-    public interface ILocationService
+    public interface ITripService
     {
-        public void AddLocations(Location[] locations);
+        public void AddTrip(Trip trip);
     }
 }

@@ -7,7 +7,7 @@ namespace InTheClearWebV2.Repositories
     public interface ILocationRepository
     {
         public void AddLocations(Location[] locations);
-        public List<Location> GetTrip(int UserId, Guid tripId);
+        public void Save();
         
     }
 }

@@ -6,12 +6,12 @@ namespace InTheClearWebV2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LocationsController : ControllerBase
+    public class TripController : ControllerBase
     {
-        private readonly ILocationService service;
+        private readonly ITripService service;
    
-
-        public LocationsController(ILocationService _service)
+        
+        public TripController(ITripService _service)
         {
             service = _service;
             
@@ -20,9 +20,9 @@ namespace InTheClearWebV2.Controllers
 
         //POST: api/Locations
         [HttpPost]
-        public void PostLocations(Location[] location)
+        public void PostLocations(Trip trip)
         {
-            service.AddLocations(location);
+            service.AddTrip(trip);
 
         }
     }

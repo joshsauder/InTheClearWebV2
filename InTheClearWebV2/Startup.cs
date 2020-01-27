@@ -29,11 +29,12 @@ namespace InTheClearWebV2
 
             services.AddDbContext<EntityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("InTheClearContext")));
 
-            services.AddTransient<ILocationRepository, LocationRepository>();
-            services.AddTransient<ILocationService, LocationService>();
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddSingleton<IDirectionsService, DirectionsService>();
+            services.AddScoped<ILocationRepository, LocationRepository>();
+            services.AddScoped<ITripRepository, TripRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITripService, TripService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IDirectionsService, DirectionsService>();
 
             services.AddControllersWithViews();
 
