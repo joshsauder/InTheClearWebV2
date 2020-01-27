@@ -30,6 +30,7 @@ namespace InTheClearWebV2.Services
             user.Salt = password.Item1;
 
             user.CreatedAt = DateTime.Now;
+            user.UpdatedAt = DateTime.Now;
 
             repository.CreateUser(user);
         }
@@ -38,19 +39,21 @@ namespace InTheClearWebV2.Services
         {
             var foundUser = repository.FindUser(user.Email);
 
+            if (foundUser == null)
+            {
+                return null;
+
+            }
+
             if (compareHash(user.Password, foundUser.Password, foundUser.Salt))
+            {
+                var token = createToken(foundUser.Id, foundUser.Email);
+                return fromUserToResponse(foundUser, token); 
+            }
+            else
             {
                 string message = "Password is incorrect - " + user.Password;
                 throw new UserPasswordIncorrectException(message);
-            }
-
-            if(foundUser != null)
-            {
-                var token = createToken(foundUser.Id, foundUser.Email);
-                return fromUserToResponse(foundUser, token);
-            }else
-            {
-                return null;
             }
         }
 
