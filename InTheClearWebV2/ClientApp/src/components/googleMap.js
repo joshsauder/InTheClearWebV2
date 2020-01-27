@@ -90,7 +90,7 @@ class GoogleMap extends PolylineGenerator {
           tripData.duration = directionsData[2]
           tripData.distance = directionsData[3]
 
-          this.postStops(tripData.tripData)
+          this.postStops(tripData.tripData, tripData.distance, tripData.duration)
           this.setState({
             tripData: tripData
           })
@@ -98,16 +98,24 @@ class GoogleMap extends PolylineGenerator {
       }
 
 
-      postStops = (tripData) => {
+      postStops = (tripData, distance, duration) => {
         //save each stop
         const data = tripData.map(trip => {
           return {
             City: trip.city,
             Condition: trip.weather.Description,
-            UserId: this.props.userId
+            Temperature: trip.weather.Temperature
           }
         })
-        Axios.post('/api/Locations', data).catch(err => {
+
+        const postData = {
+          userId: this.props.userId,
+          duration: duration,
+          distance: distance,
+          Locations: data
+        }
+        
+        Axios.post('/api/Trip', postData).catch(err => {
           console.log(err)
         })
       }
