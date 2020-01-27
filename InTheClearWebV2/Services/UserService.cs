@@ -29,6 +29,8 @@ namespace InTheClearWebV2.Services
             user.Password = password.Item2;
             user.Salt = password.Item1;
 
+            user.CreatedAt = DateTime.Now;
+
             repository.CreateUser(user);
         }
 

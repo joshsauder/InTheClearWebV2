@@ -18,6 +18,7 @@ namespace InTheClearWebV2.Services
         {
             var guid = Guid.NewGuid();
             trip.TripId = guid;
+            trip.CreatedAt = DateTime.Now;
 
             repository.AddTrip(trip);
             repository.Save();
