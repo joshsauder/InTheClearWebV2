@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json.Linq;
 
 namespace InTheClearWebV2.Controllers
 {
@@ -31,8 +32,7 @@ namespace InTheClearWebV2.Controllers
 
         [HttpPost]
         [Route("Info")]
-        [Authorize]
-        public async Task<Dictionary<string, string>> getCityNamesAndWeather(Route[] route)
+        public async Task<Dictionary<string, JObject>> getCityNamesAndWeather(Route[] route)
         {
             return await service.processNamesAndWeather(route);
         }

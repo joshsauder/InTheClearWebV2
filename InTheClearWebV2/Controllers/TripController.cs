@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InTheClearWebV2.Controllers
 {

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using InTheClearWebV2.Models;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace InTheClearWebV2.Services
 {
@@ -33,7 +34,7 @@ namespace InTheClearWebV2.Services
             return response;
         }
 
-        public async Task<Dictionary<string, string>> processNamesAndWeather(Route[] route)
+        public async Task<Dictionary<string, JObject>> processNamesAndWeather(Route[] route)
         {
             var request = new Dictionary<string, Route[]>{
                 { "List", route}
@@ -41,12 +42,12 @@ namespace InTheClearWebV2.Services
 
             var stringContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
-            Task<string> weather = processWeather(stringContent);
-            Task<string> names = processNames(stringContent);
+            Task<JObject> weather = processWeather(stringContent);
+            Task<JObject> names = processNames(stringContent);
  
             await Task.WhenAll(weather, names);
 
-            var response = new Dictionary<string, string>
+            var response = new Dictionary<string, JObject>
             {
                 {"weather", await weather },
                 {"locations", await names }
@@ -88,7 +89,7 @@ namespace InTheClearWebV2.Services
 
         }
 
-        private async Task<string> processWeather(StringContent route)
+        private async Task<JObject> processWeather(StringContent route)
         {
             var key = Environment.GetEnvironmentVariable("AWS_KEY");
             var url = $"https://{key}.execute-api.us-east-1.amazonaws.com/Prod/weather";
@@ -97,7 +98,7 @@ namespace InTheClearWebV2.Services
 
         }
 
-        private async Task<string> processNames(StringContent route)
+        private async Task<JObject> processNames(StringContent route)
         {
             var key = Environment.GetEnvironmentVariable("AWS_KEY");
             var url = $"https://{key}.execute-api.us-east-1.amazonaws.com/Prod/reveresegeocode";
@@ -106,12 +107,12 @@ namespace InTheClearWebV2.Services
 
         }
 
-        private async Task<string> lambdaRequest(StringContent route, string url)
+        private async Task<JObject> lambdaRequest(StringContent route, string url)
         {
             var weatherResponse = await client.PostAsync(url, route);
             var contents = weatherResponse.Content.ReadAsStringAsync().Result;
 
-            return contents;
+            return JObject.Parse(contents);
         }
     }
 }
