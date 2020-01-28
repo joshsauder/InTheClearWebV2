@@ -20,6 +20,7 @@ namespace InTheClearWebV2.Controllers
 
         //POST: api/Locations
         [HttpPost]
+        [Authorize]
         public void PostLocations(Trip trip)
         {
             service.AddTrip(trip);

@@ -29,7 +29,7 @@ namespace InTheClearWebV2.Services
                 {"points", JsonConvert.SerializeObject(content.routes[0].overview_polyline.points)},
                 {"steps", Convert.ToString(content.routes[0].legs[0].steps)}
             };
-
+            
             return response;
         }
 

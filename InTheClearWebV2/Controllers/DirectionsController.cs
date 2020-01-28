@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InTheClearWebV2.Controllers
 {
@@ -21,6 +22,7 @@ namespace InTheClearWebV2.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<Dictionary<string, string>> getDirections(string start, string end)
         {
             return await service.processDirections(start, end);
@@ -29,6 +31,7 @@ namespace InTheClearWebV2.Controllers
 
         [HttpPost]
         [Route("Info")]
+        [Authorize]
         public async Task<Dictionary<string, string>> getCityNamesAndWeather(Route[] route)
         {
             return await service.processNamesAndWeather(route);
@@ -36,6 +39,7 @@ namespace InTheClearWebV2.Controllers
 
         [HttpPost]
         [Route("Times")]
+        [Authorize]
         public async Task<List<Dictionary<string, string>>> getTripTimes(Route[] route)
         {
 
