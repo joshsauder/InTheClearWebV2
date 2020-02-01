@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Text;
 using InTheClearWebV2.Models;
 using InTheClearWebV2.ViewModal;
@@ -10,6 +9,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
+using Google.Apis.Auth;
+using System.Threading.Tasks;
 
 namespace InTheClearWebV2.Services
 {
@@ -47,7 +48,7 @@ namespace InTheClearWebV2.Services
 
             if (compareHash(user.Password, foundUser.Password, foundUser.Salt))
             {
-                var token = createToken(foundUser.Id, foundUser.Email);
+                var token = createToken(foundUser.Id);
                 return fromUserToResponse(foundUser, token); 
             }
             else
@@ -57,8 +58,10 @@ namespace InTheClearWebV2.Services
             }
         }
 
-        public UserResponse ThirdPartyUser(User user)
+        public async Task<UserResponse> GoogleUser(string token)
         {
+
+            User user = await authenticateGoogle(token);
             var foundUser = repository.FindUser(user.Email);
 
             if(foundUser == null)
@@ -71,11 +74,11 @@ namespace InTheClearWebV2.Services
                 foundUser = repository.FindUser(user.Email);
             }
 
-            var token = createToken(foundUser.Id, foundUser.Email);
-            return fromUserToResponse(foundUser, token);
+            var userToken = createToken(foundUser.Id);
+            return fromUserToResponse(foundUser, userToken);
         }
 
-        private string createToken(long Id, string email)
+        private string createToken(long Id)
         {
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -91,6 +94,18 @@ namespace InTheClearWebV2.Services
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        private async Task<User> authenticateGoogle(string token)
+        {
+            GoogleJsonWebSignature.Payload payload = await GoogleJsonWebSignature.ValidateAsync(token);
+
+            return new User()
+            {
+                FirstName = payload.GivenName,
+                LastName = payload.FamilyName,
+                Email = payload.Email
+            };
         }
 
         private UserResponse fromUserToResponse(User user, string token)

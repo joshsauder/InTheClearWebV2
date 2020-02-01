@@ -1,11 +1,10 @@
-using System;
-using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
+using InTheClearWebV2.ViewModal;
 using InTheClearWebV2.Exceptions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace InTheClearWebV2.Controllers
 {
@@ -65,9 +64,9 @@ namespace InTheClearWebV2.Controllers
         [HttpPost]
         [Route("Auth/Google")]
         [AllowAnonymous]
-        public IActionResult GoogleAuth(User user)
+        public Task<UserResponse> GoogleAuth(string token)
         {
-            return Ok(service.ThirdPartyUser(user));
+            return service.GoogleUser(token);
         }
     }
 }

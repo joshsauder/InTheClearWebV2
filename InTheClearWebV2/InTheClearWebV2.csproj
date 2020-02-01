@@ -25,14 +25,15 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.1" />
+    <PackageReference Include="Google.Apis.Auth" Version="1.43.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-    <None Include="**/*" />
-    <None Include="**/*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,7 +44,6 @@
     <Folder Include="ViewModal\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Repository\LocationRepository.cs" />
     <Compile Remove="Repository\LocationRepository.cs" />
     <Compile Remove="ViewModal\WeatherResponse.cs" />
   </ItemGroup>

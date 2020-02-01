@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using InTheClearWebV2.Models;
 using InTheClearWebV2.ViewModal;
 
@@ -8,6 +9,6 @@ namespace InTheClearWebV2.Services
     {
         public void CreateUser(User user);
         public UserResponse FindUser(User user);
-        public UserResponse ThirdPartyUser(User user);
+        public Task<UserResponse> GoogleUser(string token);
     }
 }

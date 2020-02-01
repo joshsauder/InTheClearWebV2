@@ -24,7 +24,7 @@ namespace InTheClearWebV2.Repositories
         public User FindUser(string email)
         {
             return context.Users
-                .Single(user => user.Email == email);
+                .SingleOrDefault(user => user.Email == email);
         }
     }
 }

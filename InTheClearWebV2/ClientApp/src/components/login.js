@@ -96,14 +96,16 @@ class Login extends Component {
 
     onSignIn(googleUser) {
 
-        const loginObj = {
-            token: googleUser.getAuthResponse().id_token
-        }
+        const token = googleUser.getAuthResponse().id_token
 
-        Axios.post('api/user/auth/google', loginObj, {withCredentials: true})
+        Axios.post(`api/user/auth/google?token=${token}`, {withCredentials: true})
         .then(res => {
             if(res.status == 200){
                 //go to main page since access is granted
+                Axios.defaults.headers.common["Authorization"] = "bearer " + res.data.token
+                Axios.defaults.headers.common["UserId"] = res.data.id
+                Axios.defaults.headers.common["Name"] = res.data.firstName
+
                 this.props.history.push('/')
             }
         }).catch(err => {

@@ -36,7 +36,11 @@ namespace InTheClearWebV2
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDirectionsService, DirectionsService>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            ) ;
+
 
             services.AddAuthentication(x =>
             {
