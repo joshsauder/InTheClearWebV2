@@ -32,7 +32,7 @@ namespace InTheClearWebV2.Controllers
 
         [HttpPost]
         [Route("Info")]
-        public async Task<Dictionary<string, JObject>> getCityNamesAndWeather(Route[] route)
+        public async Task<Dictionary<string, string>> getCityNamesAndWeather(Route[] route)
         {
             return await service.processNamesAndWeather(route);
         }

@@ -63,13 +63,11 @@ class PolylineGenerator extends Component {
             });
 
             const response_1 = await axios.post("/api/Directions/Info", stepObj);
-            var weather = response_1.data.weather;
-            var cities = response_1.data.locations;
-
-            weather = JSON.parse(weather)
-            cities = JSON.parse(cities)
- 
-
+            var weather = JSON.parse(response_1.data.weather);
+            var cities = JSON.parse(response_1.data.locations);
+            
+            console.log(cities)
+            
             this.weatherPerStep(steps, path, weather, map);
             for (var i = 0; i < path.length; i++) {
                 bounds.extend(path[i]);

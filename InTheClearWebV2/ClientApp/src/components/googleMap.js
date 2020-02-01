@@ -21,7 +21,8 @@ class GoogleMap extends PolylineGenerator {
           startMarker: null,
           endMarker: null,
           tripData: new TripsModel(),
-          showStopModal: false
+          showStopModal: false,
+          userId: Axios.defaults.headers.common["UserId"]
         }
         this.showDirections = this.showDirections.bind(this);
         this.polylineArray = []
@@ -104,14 +105,14 @@ class GoogleMap extends PolylineGenerator {
           return {
             City: trip.city,
             Condition: trip.weather.Description,
-            Temperature: trip.weather.Temperature
+            Temperature: Math.round(trip.weather.Temperature)
           }
         })
 
         const postData = {
-          userId: this.props.userId,
-          duration: duration,
-          distance: distance,
+          UserId: this.state.userId,
+          Duration: duration,
+          Distance: distance,
           Locations: data
         }
         
