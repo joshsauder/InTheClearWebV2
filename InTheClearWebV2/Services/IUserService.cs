@@ -8,5 +8,6 @@ namespace InTheClearWebV2.Services
     {
         public void CreateUser(User user);
         public UserResponse FindUser(User user);
+        public UserResponse ThirdPartyUser(User user);
     }
 }

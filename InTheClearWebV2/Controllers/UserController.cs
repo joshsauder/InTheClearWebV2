@@ -61,5 +61,13 @@ namespace InTheClearWebV2.Controllers
                 return Unauthorized(e.Message);
             }
         }
+
+        [HttpPost]
+        [Route("Auth/Google")]
+        [AllowAnonymous]
+        public IActionResult GoogleAuth(User user)
+        {
+            return Ok(service.ThirdPartyUser(user));
+        }
     }
 }

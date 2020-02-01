@@ -57,6 +57,24 @@ namespace InTheClearWebV2.Services
             }
         }
 
+        public UserResponse ThirdPartyUser(User user)
+        {
+            var foundUser = repository.FindUser(user.Email);
+
+            if(foundUser == null)
+            {
+                user.CreatedAt = DateTime.Now;
+                user.UpdatedAt = DateTime.Now;
+
+                repository.CreateUser(user);
+
+                foundUser = repository.FindUser(user.Email);
+            }
+
+            var token = createToken(foundUser.Id, foundUser.Email);
+            return fromUserToResponse(foundUser, token);
+        }
+
         private string createToken(long Id, string email)
         {
             // authentication successful so generate jwt token
