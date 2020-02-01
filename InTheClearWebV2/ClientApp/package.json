@@ -27,7 +27,8 @@
     "react-sortable-hoc": "^1.10.1",
     "rimraf": "^2.6.2",
     "typescript": "^3.6.2",
-    "typescript-eslint": "0.0.1-alpha.0"
+    "typescript-eslint": "0.0.1-alpha.0",
+    "validator": "^12.2.0"
   },
   "devDependencies": {
     "ajv": "^6.9.1",

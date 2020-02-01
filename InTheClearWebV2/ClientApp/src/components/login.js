@@ -6,6 +6,7 @@ import {Card, Button} from 'react-bootstrap'
 import LoginContainer from './loginContainer'
 import Axios from 'axios';
 import "../style/login.css"
+import validator from 'validator'
 
 class Login extends Component {
 
@@ -70,6 +71,11 @@ class Login extends Component {
     submitNewUser = (event) => {
         event.preventDefault();
 
+        if(!this.validateInputs()){
+            alert("Invalid Credentials.")
+            return
+        }        
+
         const userObj = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
@@ -103,6 +109,14 @@ class Login extends Component {
         }).catch(err => {
             alert("Error logging in! Please try again.")
         })  
+    }
+
+    validateInputs = () => {
+        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
+        if(validator.isEmail(this.state.email) && this.state.password.match(regex)){
+            return true
+        }
+        return false
     }
 
     render(){
@@ -143,7 +157,8 @@ class Login extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="password">Password</label>
-                                        <input name="password" className="form-control" value={this.state.password} onChange={this.handleInputChange} required></input>
+                                        <input name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}" className="form-control" value={this.state.password} onChange={this.handleInputChange} required></input>
+                                        <small className="form-text">Must contain at least one uppercase letter, lowercase letter, and one number </small>
                                     </div>
                                     <div className="form-row">
                                         <div className="form-group col-md-6">
