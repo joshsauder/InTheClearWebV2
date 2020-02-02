@@ -16,7 +16,8 @@ namespace InTheClearWebV2.Models
         [Required]
         public string Email { get; set; }
         public string Password { get; set; }
-        public Boolean? ThirdParty { get; set; }
+        [Required]
+        public bool Paid { get; set; }
         public byte[] Salt { get; set; }
         [DataType(DataType.Date)]
         public DateTime CreatedAt { get; set; }

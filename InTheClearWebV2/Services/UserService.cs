@@ -58,7 +58,7 @@ namespace InTheClearWebV2.Services
             }
         }
 
-        public async Task<UserResponse> GoogleUser(string token)
+        public async Task<UserResponse> GoogleUser(string token, bool paid)
         {
 
             User user = await authenticateGoogle(token);
@@ -68,6 +68,7 @@ namespace InTheClearWebV2.Services
             {
                 user.CreatedAt = DateTime.Now;
                 user.UpdatedAt = DateTime.Now;
+                user.Paid = paid;
 
                 repository.CreateUser(user);
 
@@ -96,6 +97,7 @@ namespace InTheClearWebV2.Services
             return tokenHandler.WriteToken(token);
         }
 
+
         private async Task<User> authenticateGoogle(string token)
         {
             GoogleJsonWebSignature.Payload payload = await GoogleJsonWebSignature.ValidateAsync(token);
@@ -116,6 +118,7 @@ namespace InTheClearWebV2.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
+                Paid = user.Paid,
                 CreatedAt = user.CreatedAt,
                 UpdatedAt = user.UpdatedAt,
                 Token = token

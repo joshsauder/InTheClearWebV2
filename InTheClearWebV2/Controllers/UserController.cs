@@ -64,9 +64,9 @@ namespace InTheClearWebV2.Controllers
         [HttpPost]
         [Route("Auth/Google")]
         [AllowAnonymous]
-        public Task<UserResponse> GoogleAuth(string token)
+        public Task<UserResponse> GoogleAuth(string token, bool paid)
         {
-            return service.GoogleUser(token);
+            return service.GoogleUser(token, paid);
         }
     }
 }

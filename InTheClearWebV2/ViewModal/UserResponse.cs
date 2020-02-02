@@ -7,6 +7,7 @@ namespace InTheClearWebV2.ViewModal
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public bool Paid {get; set;}
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public string Token { get; set; }

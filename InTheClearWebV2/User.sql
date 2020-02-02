@@ -5,7 +5,8 @@ CREATE TABLE [dbo].[User]
     LastName NVARCHAR(MAX),
     Email NVARCHAR(50) NOT NULL,
     Password NVARCHAR(MAX),
-    Salt BINARY(32),
+    Salt BINARY(16),
+    Paid Bit NOT NULL,
     CreatedAt DATETIME,
     UpdatedAt DATETIME
 );

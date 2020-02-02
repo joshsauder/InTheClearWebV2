@@ -80,7 +80,8 @@ class Login extends Component {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             password: this.state.password,
-            email: this.state.email
+            email: this.state.email,
+            paid: false
         }
 
         Axios.post('/api/User', userObj)
@@ -98,7 +99,7 @@ class Login extends Component {
 
         const token = googleUser.getAuthResponse().id_token
 
-        Axios.post(`api/user/auth/google?token=${token}`, {withCredentials: true})
+        Axios.post(`api/user/auth/google?token=${token}&paid=false`, {withCredentials: true})
         .then(res => {
             if(res.status == 200){
                 //go to main page since access is granted

@@ -9,6 +9,6 @@ namespace InTheClearWebV2.Services
     {
         public void CreateUser(User user);
         public UserResponse FindUser(User user);
-        public Task<UserResponse> GoogleUser(string token);
+        public Task<UserResponse> GoogleUser(string token, bool paid);
     }
 }
