@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
@@ -39,7 +40,7 @@ namespace InTheClearWebV2.Controllers
         [HttpPost]
         [Route("Auth")]
         [AllowAnonymous]
-        public  IActionResult FindUser(User user)
+        public IActionResult FindUser(User user)
         {
             try
             {
