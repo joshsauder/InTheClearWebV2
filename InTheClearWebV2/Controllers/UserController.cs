@@ -29,22 +29,13 @@ namespace InTheClearWebV2.Controllers
         }
 
         [HttpPost]
-        [Route("")]
-        [AllowAnonymous]
-        public void CreateUser(User user)
-        {
-            service.CreateUser(user);
-
-        }
-
-        [HttpPost]
         [Route("Auth")]
         [AllowAnonymous]
         public IActionResult FindUser(User user)
         {
             try
             {
-                var userResponse = service.FindUser(user);
+                var userResponse = service.AuthUser(user);
 
                 if (userResponse == null)
                 {
@@ -60,14 +51,6 @@ namespace InTheClearWebV2.Controllers
             {
                 return Unauthorized(e.Message);
             }
-        }
-
-        [HttpPost]
-        [Route("Auth/Google")]
-        [AllowAnonymous]
-        public Task<UserResponse> GoogleAuth(string token, bool paid)
-        {
-            return service.GoogleUser(token, paid);
         }
     }
 }

@@ -7,8 +7,6 @@ namespace InTheClearWebV2.Services
 {
     public interface IUserService
     {
-        public void CreateUser(User user);
-        public UserResponse FindUser(User user);
-        public Task<UserResponse> GoogleUser(string token, bool paid);
+        public UserResponse AuthUser(User user);
     }
 }
