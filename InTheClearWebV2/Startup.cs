@@ -10,7 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Newtonsoft.Json;
+using System.Net;
+using System;
 
 namespace InTheClearWebV2
 {
@@ -41,22 +43,34 @@ namespace InTheClearWebV2
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             ) ;
 
-
-            services.AddAuthentication(x =>
+            var Region = Configuration["AWSCognito:Region"];
+            var PoolId = Configuration["AWSCognito:PoolId"];
+            var AppClientId = Configuration["AWSCognito:AppClientId"];
+            
+            services.AddAuthentication(options =>
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(x =>
+            .AddJwtBearer(options =>
             {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Need_to_change_to_something_much_larger")),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
+                    IssuerSigningKeyResolver = (s, securityToken, identifier, parameters) =>
+                    {
+                        // Get JsonWebKeySet from AWS
+                        var json = new WebClient().DownloadString(parameters.ValidIssuer + "/.well-known/jwks.json");
+                        // Serialize the result
+                        return JsonConvert.DeserializeObject<JsonWebKeySet>(json).Keys;
+                    },
+                    ValidateIssuer = true,
+                    ValidIssuer = $"https://cognito-idp.{Region}.amazonaws.com/{PoolId}",
+                    ValidateLifetime = true,
+                    LifetimeValidator = (before, expires, token, param) => expires > DateTime.UtcNow,
+                    ValidateAudience = true,
+                    ValidAudience = AppClientId,
                 };
             });
 
@@ -100,7 +114,6 @@ namespace InTheClearWebV2
             app.UseRouting();
             app.UseCors();
             app.UseAuthentication();
-            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

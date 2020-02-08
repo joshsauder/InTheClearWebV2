@@ -34,7 +34,10 @@ class Login extends Component {
         });
 
         Auth.currentAuthenticatedUser()
-        .then(user => this.submitNewUser(user.attributes, user.username))
+        .then(user => {
+            console.log(user)
+            this.submitNewUser(user.attributes, user.username)
+        })
         .catch(() => console.log("Not signed in"));
     }
 
