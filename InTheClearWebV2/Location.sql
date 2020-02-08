@@ -3,6 +3,8 @@ CREATE TABLE [dbo].[Location](
 	[City] [nvarchar](max) NOT NULL,
 	[Condition] [nvarchar](max) NULL,
     [Temperature] [nvarchar](max) NULL,
+	[Latitude] [float] NULL,
+	[Longitude] [float] NULL,
 	[TripId] [uniqueidentifier] NOT NULL,
     PRIMARY KEY (Id),
     FOREIGN KEY (TripId) REFERENCES [Trip](TripId)
