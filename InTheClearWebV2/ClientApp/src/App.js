@@ -3,6 +3,9 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom'
 import GoogleMap from "./components/googleMap";
 import Login from "./components/login";
 import withAuth from "./services/authService";
+import Amplify from 'aws-amplify';
+import awsConfig from './aws-exports'
+Amplify.configure(awsConfig);
 
 
 function App() {

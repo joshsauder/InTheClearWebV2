@@ -1,0 +1,67 @@
+{
+    "identityPoolName": "intheclear971ec2ad_identitypool_971ec2ad",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "inthec971ec2ad",
+    "userPoolName": "intheclear971ec2ad_userpool_971ec2ad",
+    "autoVerifiedAttributes": [
+        "email"
+    ],
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+        "SMS Text Message"
+    ],
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
+    "defaultPasswordPolicy": false,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [],
+    "requiredAttributes": [
+        "email",
+        "family_name",
+        "given_name"
+    ],
+    "userpoolClientGenerateSecret": true,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientWriteAttributes": [
+        "email"
+    ],
+    "userpoolClientReadAttributes": [
+        "email"
+    ],
+    "userpoolClientLambdaRole": "inthec971ec2ad_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": false,
+    "resourceName": "intheclear971ec2ad",
+    "authSelections": "identityPoolAndUserPool",
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    },
+    "unauthRoleArn": {
+        "Fn::GetAtt": [
+            "UnauthRole",
+            "Arn"
+        ]
+    },
+    "useDefault": "defaultSocial",
+    "hostedUI": true,
+    "usernameAttributes": [
+        "email"
+    ],
+    "triggers": "{}",
+    "hostedUIDomainName": "intheclear971ec2ad-971ec2ad",
+    "authProvidersUserPool": [
+        "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"family_name\":\"family_name\",\"given_name\":\"given_name\",\"username\":\"sub\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:5000/\"],\"LogoutURLs\":[\"http://localhost:5000/\"]}",
+    "userPoolGroupList": [],
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
+    "dependsOn": []
+}

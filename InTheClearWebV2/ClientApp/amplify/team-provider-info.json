@@ -1,0 +1,22 @@
+{
+    "local": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-intheclear-local-170154-authRole",
+            "UnauthRoleArn": "arn:aws:iam::457593462069:role/amplify-intheclear-local-170154-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::457593462069:role/amplify-intheclear-local-170154-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-intheclear-local-170154-deployment",
+            "UnauthRoleName": "amplify-intheclear-local-170154-unauthRole",
+            "StackName": "amplify-intheclear-local-170154",
+            "StackId": "arn:aws:cloudformation:us-east-1:457593462069:stack/amplify-intheclear-local-170154/9fdd65f0-4abe-11ea-b41c-0ac97ebd7097",
+            "AmplifyAppId": "dllfud5ixfx0y"
+        },
+        "categories": {
+            "auth": {
+                "intheclear971ec2ad": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"795341064063-2ter8akk3surthjvurmkgthmp3ok6h2j.apps.googleusercontent.com\",\"client_secret\":\"oTTBjpq0Cbdn-sCj5BBL4oPM\"}]"
+                }
+            }
+        }
+    }
+}

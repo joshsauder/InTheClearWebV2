@@ -1,0 +1,9 @@
+{
+	"auth": {
+		"intheclear971ec2ad": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}
