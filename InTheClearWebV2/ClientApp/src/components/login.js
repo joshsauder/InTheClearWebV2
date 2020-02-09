@@ -15,13 +15,6 @@ class Login extends Component {
 
     constructor(props){
         super(props)
-        this.state = {
-            firstName: "",
-            lastName: "",
-            password: "",
-            email: "",
-            login: true
-        }
     }
 
     componentDidMount() {
@@ -54,8 +47,7 @@ class Login extends Component {
         Axios.post('/api/User/Auth', userObj)
         .then(res => {
             if(res.status == 200){
-                //show login form
-                this.setState({login: true})
+                this.props.history.push("/")
             }
         }).catch(err => {
             alert("There was an issue signing you up! Please try again.")
@@ -70,7 +62,7 @@ class Login extends Component {
             <div className="container">
                 <div className="row justify-content-md-center mt-4">
                     <Card className="col-5" style={{maxHeight: '60vh'}}>
-                        <Card.Header className="headerFont">{this.state.login ? "Login" : "Register"}</Card.Header>
+                        <Card.Header className="headerFont">Login</Card.Header>
                         <Card.Body>
                             <div id="my-signin2" className="mb-2 d-flex justify-content-center" onClick={() => Auth.federatedSignIn({provider: 'Google'})} />
                         </Card.Body>
