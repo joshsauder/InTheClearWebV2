@@ -7,6 +7,7 @@ namespace InTheClearWebV2.Repositories
     {
         public void CreateUser(User user); 
         public User FindUser(String email);
+        public void updatePaid(string email);
 
     }
 }

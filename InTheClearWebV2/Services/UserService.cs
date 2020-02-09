@@ -30,11 +30,21 @@ namespace InTheClearWebV2.Services
                 user.CreatedAt = DateTime.Now;
                 user.UpdatedAt = DateTime.Now;
                 repository.CreateUser(user);
-                fromUserToResponse(user);
+                return fromUserToResponse(user);
             }
-
+        
+            updatePaid(user, foundUser);
             return fromUserToResponse(foundUser);
         }
+
+        private void updatePaid(User user, User foundUser){
+
+            if(user.Paid == true && foundUser.Paid == false){
+                foundUser.Paid = true;
+                repository.updatePaid(user.Email);
+            }
+        }
+
 
         private UserResponse fromUserToResponse(User user)
         {

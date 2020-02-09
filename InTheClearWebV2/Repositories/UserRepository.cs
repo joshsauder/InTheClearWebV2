@@ -26,5 +26,16 @@ namespace InTheClearWebV2.Repositories
             return context.Users
                 .SingleOrDefault(user => user.Email == email);
         }
+
+        public void updatePaid(string email)
+        {
+            var query = 
+                (from user in context.Users
+                where user.Email == email
+                select user).First();
+            query.Paid = true;
+
+            context.SaveChanges();
+        }
     }
 }

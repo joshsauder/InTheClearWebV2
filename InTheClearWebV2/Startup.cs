@@ -67,8 +67,7 @@ namespace InTheClearWebV2
                     },
                     ValidateIssuer = true,
                     ValidIssuer = $"https://cognito-idp.{Region}.amazonaws.com/{PoolId}",
-                    ValidateLifetime = true,
-                    LifetimeValidator = (before, expires, token, param) => expires > DateTime.UtcNow,
+                    ValidateLifetime = false,
                     ValidateAudience = true,
                     ValidAudience = AppClientId,
                 };
