@@ -46,7 +46,7 @@ namespace InTheClearWebV2
             var Region = Configuration["AWSCognito:Region"];
             var PoolId = Configuration["AWSCognito:PoolId"];
             var AppClientId = Configuration["AWSCognito:AppClientId"];
-            
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -114,6 +114,7 @@ namespace InTheClearWebV2
             app.UseRouting();
             app.UseCors();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

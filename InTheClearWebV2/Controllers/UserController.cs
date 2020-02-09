@@ -30,7 +30,7 @@ namespace InTheClearWebV2.Controllers
 
         [HttpPost]
         [Route("Auth")]
-        [AllowAnonymous]
+        [Authorize]
         public IActionResult FindUser(User user)
         {
             try
@@ -41,8 +41,6 @@ namespace InTheClearWebV2.Controllers
                 {
                     return NotFound();
                 }
-
-                this.Response.Headers.Add("Authorization", "bearer " + userResponse.Token);
 
                 return Ok(userResponse);
 

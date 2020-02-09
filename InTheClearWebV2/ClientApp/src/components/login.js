@@ -35,32 +35,10 @@ class Login extends Component {
 
         Auth.currentAuthenticatedUser()
         .then(user => {
-            console.log(user)
+            Axios.defaults.headers.common["Authorization"] = "Bearer " + user.signInUserSession.idToken.jwtToken
             this.submitNewUser(user.attributes, user.username)
         })
         .catch(() => console.log("Not signed in"));
-    }
-
-    onSubmit = (event) => {
-        event.preventDefault();
-        const loginObj = {
-            email: this.state.email, 
-            password: this.state.password
-        }
-
-        Axios.post('/api/User/Auth', loginObj, {withCredentials: true})
-        .then(res => {
-            if(res.status == 200){
-                //go to main page since access is granted
-                Axios.defaults.headers.common["Authorization"] = "bearer " + res.data.token
-                Axios.defaults.headers.common["UserId"] = res.data.id
-                Axios.defaults.headers.common["Name"] = res.data.firstName
-
-                this.props.history.push('/')
-            }
-        }).catch(err => {
-            alert("Error logging in! Please try again.")
-        })   
     }
 
     submitNewUser = (attributes, username) => {      
@@ -73,7 +51,7 @@ class Login extends Component {
             id: username
         }
 
-        Axios.post('/api/User', userObj)
+        Axios.post('/api/User/Auth', userObj)
         .then(res => {
             if(res.status == 200){
                 //show login form
