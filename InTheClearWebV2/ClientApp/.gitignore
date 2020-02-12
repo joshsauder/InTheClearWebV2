@@ -9,8 +9,5 @@ amplify/backend/awscloudformation
 build/
 dist/
 node_modules/
-aws-exports.js
-awsconfiguration.json
-amplifyconfiguration.json
-amplify-gradle-config.json
-amplifyxc.config
+src/firebaseConfig.json
+
