@@ -12,7 +12,6 @@ using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Net;
-using System;
 
 namespace InTheClearWebV2
 {
@@ -40,38 +39,25 @@ namespace InTheClearWebV2
 
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             ) ;
 
-            var Region = Configuration["AWSCognito:Region"];
-            var PoolId = Configuration["AWSCognito:PoolId"];
-            var AppClientId = Configuration["AWSCognito:AppClientId"];
+            var Project = Configuration["Firebase:ProjectName"];
+            var Issuer = Configuration["Firebase:Issuer"];
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.SaveToken = true;
-                options.TokenValidationParameters = new TokenValidationParameters
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKeyResolver = (s, securityToken, identifier, parameters) =>
+                    options.Authority = Issuer;
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        // Get JsonWebKeySet from AWS
-                        var json = new WebClient().DownloadString(parameters.ValidIssuer + "/.well-known/jwks.json");
-                        // Serialize the result
-                        return JsonConvert.DeserializeObject<JsonWebKeySet>(json).Keys;
-                    },
-                    ValidateIssuer = true,
-                    ValidIssuer = $"https://cognito-idp.{Region}.amazonaws.com/{PoolId}",
-                    ValidateLifetime = false,
-                    ValidateAudience = true,
-                    ValidAudience = AppClientId,
-                };
-            });
+                        ValidateIssuer = true,
+                        ValidIssuer = Project,
+                        ValidateAudience = true,
+                        ValidAudience = Project,
+                    };
+                });
 
             services.AddSwaggerGen(c =>
             {
