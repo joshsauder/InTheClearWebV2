@@ -17,18 +17,22 @@ class Login extends Component {
 
         firebase.auth().onAuthStateChanged(function(user){
             if(user){
-                console.log(user)
+                let data = user.providerData
+                let name = user.providerData.find(user => user.displayName != null)
+                
+                //name could be undefined if name is never given
+                name ? this.submitNewUser(name) : this.submitNewUser(data[0])
             }
         })
     }
 
-    submitNewUser = (attributes, username) => {      
+    submitNewUser = (attributes) => {      
 
         const userObj = {
-            displayName: attributes.given_name,
+            displayName: attributes.displayName,
             email: attributes.email,
             paid: false,
-            id: username
+            id: attributes.uid
         }
 
         Axios.post('/api/User/Auth', userObj)
@@ -62,7 +66,6 @@ class Login extends Component {
                     <Card className="col-5" style={{maxHeight: '60vh'}}>
                         <Card.Header className="headerFont">Login</Card.Header>
                         <Card.Body>
-                        //TODO STYLING NEEDED
                             <div className="g-signin2 signin-button mb-1" data-width="240" data-height="48" data-longtitle="true" onClick={() => this.signInUser(googleAuth)}>Google Sign In</div>
                             <div onClick={() => this.signInUser(appleAuth)}><img className="signin-button" src={apple}/></div>
                         </Card.Body>

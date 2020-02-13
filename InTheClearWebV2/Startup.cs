@@ -56,6 +56,7 @@ namespace InTheClearWebV2
                         ValidIssuer = Project,
                         ValidateAudience = true,
                         ValidAudience = Project,
+                        ValidateLifetime = false
                     };
                 });
 
