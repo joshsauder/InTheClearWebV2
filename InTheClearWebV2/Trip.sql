@@ -1,6 +1,6 @@
 CREATE TABLE [dbo].[Trip] (
     [TripId] [uniqueidentifier] NOT NULL,
-    [UserId] [int] NOT NULL,
+    [UserId] [varchar](128) NOT NULL,
     [Duration] [int] NOT NULL,
     [Distance] [int] NOT NULL,
     [CreatedAt] [datetime] NOT NULL,

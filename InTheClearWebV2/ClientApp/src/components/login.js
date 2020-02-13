@@ -62,6 +62,7 @@ class Login extends Component {
                     <Card className="col-5" style={{maxHeight: '60vh'}}>
                         <Card.Header className="headerFont">Login</Card.Header>
                         <Card.Body>
+                        //TODO STYLING NEEDED
                             <div className="g-signin2 signin-button mb-1" data-width="240" data-height="48" data-longtitle="true" onClick={() => this.signInUser(googleAuth)}>Google Sign In</div>
                             <div onClick={() => this.signInUser(appleAuth)}><img className="signin-button" src={apple}/></div>
                         </Card.Body>

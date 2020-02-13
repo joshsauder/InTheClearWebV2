@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Text;
 using InTheClearWebV2.Models;
-using InTheClearWebV2.ViewModal;
 using InTheClearWebV2.Repositories;
 
 namespace InTheClearWebV2.Services
@@ -51,7 +49,7 @@ namespace InTheClearWebV2.Services
             return new UserResponse()
             {
                 Id = user.Id,
-                FirstName = user.FirstName,
+                DisplayName = user.DisplayName,
                 Email = user.Email,
                 Paid = user.Paid,
             };

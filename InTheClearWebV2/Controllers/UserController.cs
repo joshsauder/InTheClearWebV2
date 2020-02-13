@@ -2,10 +2,8 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
-using InTheClearWebV2.ViewModal;
 using InTheClearWebV2.Exceptions;
 using Microsoft.AspNetCore.Authorization;
-using System.Threading.Tasks;
 
 namespace InTheClearWebV2.Controllers
 {

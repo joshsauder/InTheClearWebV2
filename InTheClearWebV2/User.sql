@@ -1,11 +1,8 @@
 CREATE TABLE [dbo].[User] 
 (
-    Id BIGINT IDENTITY(0,1) PRIMARY KEY,
-    FirstName NVARCHAR(MAX),
-    LastName NVARCHAR(MAX),
-    Email NVARCHAR(50) NOT NULL,
-    Password NVARCHAR(MAX),
-    Salt BINARY(16),
+    Id VARCHAR(128) PRIMARY KEY,
+    DisplayName NVARCHAR(MAX),
+    Email NVARCHAR(60) NOT NULL,
     Paid Bit NOT NULL,
     CreatedAt DATETIME,
     UpdatedAt DATETIME

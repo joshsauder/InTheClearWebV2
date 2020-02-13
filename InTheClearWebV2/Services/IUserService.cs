@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using InTheClearWebV2.Models;
-using InTheClearWebV2.ViewModal;
+﻿using InTheClearWebV2.Models;
 
 namespace InTheClearWebV2.Services
 {

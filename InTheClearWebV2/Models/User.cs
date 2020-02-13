@@ -9,10 +9,8 @@ namespace InTheClearWebV2.Models
     public class User
     {
         public String Id { get; set; }
-        [JsonProperty(PropertyName = "firstName")]
-        public string FirstName { get; set; }
-        [JsonProperty(PropertyName = "lastName")]
-        public string LastName { get; set; }
+        [JsonProperty(PropertyName = "displayName")]
+        public string DisplayName { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]
