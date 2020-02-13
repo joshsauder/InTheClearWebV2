@@ -40,10 +40,5 @@ label {
 
 .signin-button {
     width: 240px;
-    height: 50px;
+    height: 48px;
 }
-
-.signin-button > div > div > svg {  
-    height: 50px; 
-    width: 100%;    
-}  

@@ -5,6 +5,8 @@ import Login from "./components/login";
 import withAuth from "./services/authService";
 import * as firebase from 'firebase';
 import config from "./firebaseConfig.json";
+import "firebase/analytics";
+import "firebase/auth";
 
 
 firebase.initializeApp(config);

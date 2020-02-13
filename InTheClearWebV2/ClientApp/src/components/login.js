@@ -1,15 +1,11 @@
-/* global gapi */
-/* global AppleID */
-
 import React, {Component} from 'react'
 import {Card, Button} from 'react-bootstrap'
 import LoginContainer from './loginContainer'
 import Axios from 'axios';
 import "../style/login.css"
-import validator from 'validator'
-
-// import Hub
-import { Auth, Hub } from 'aws-amplify'
+import * as firebase from 'firebase';
+import { getGoogleAuth, getAppleAuth } from '../services/authSetup';
+import apple from "../images/appleSignIn.png"
 
 class Login extends Component {
 
@@ -19,26 +15,17 @@ class Login extends Component {
 
     componentDidMount() {
 
-        gapi.signin2.render('my-signin2', {
-            'width': 240,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-        });
-
-        Auth.currentAuthenticatedUser()
-        .then(user => {
-            Axios.defaults.headers.common["Authorization"] = "Bearer " + user.signInUserSession.idToken.jwtToken
-            this.submitNewUser(user.attributes, user.username)
+        firebase.auth().onAuthStateChanged(function(user){
+            if(user){
+                console.log(user)
+            }
         })
-        .catch(() => console.log("Not signed in"));
     }
 
     submitNewUser = (attributes, username) => {      
 
         const userObj = {
-            firstName: attributes.given_name,
-            lastName: attributes.family_name,
+            displayName: attributes.given_name,
             email: attributes.email,
             paid: false,
             id: username
@@ -54,9 +41,20 @@ class Login extends Component {
         })
     }
 
+    signInUser = (provider) => {
+        firebase.auth().signInWithPopup(provider)
+        .catch(function(error) {
+            alert("Issue Signing You In!")
+            console.log(error);
+        });
+    }
+
+
 
     render(){
 
+        let googleAuth = getGoogleAuth()
+        let appleAuth = getAppleAuth()
         return(
             <LoginContainer>
             <div className="container">
@@ -64,7 +62,8 @@ class Login extends Component {
                     <Card className="col-5" style={{maxHeight: '60vh'}}>
                         <Card.Header className="headerFont">Login</Card.Header>
                         <Card.Body>
-                            <div id="my-signin2" className="mb-2 d-flex justify-content-center" onClick={() => Auth.federatedSignIn({provider: 'Google'})} />
+                            <div className="g-signin2 signin-button mb-1" data-width="240" data-height="48" data-longtitle="true" onClick={() => this.signInUser(googleAuth)}>Google Sign In</div>
+                            <div onClick={() => this.signInUser(appleAuth)}><img className="signin-button" src={apple}/></div>
                         </Card.Body>
                     </Card>
                 </div>
