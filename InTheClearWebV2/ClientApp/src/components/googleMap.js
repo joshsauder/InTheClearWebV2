@@ -22,7 +22,7 @@ class GoogleMap extends PolylineGenerator {
           endMarker: null,
           tripData: new TripsModel(),
           showStopModal: false,
-          userId: Axios.defaults.headers.common["UserId"]
+          userId: ""
         }
         this.showDirections = this.showDirections.bind(this);
         this.polylineArray = []

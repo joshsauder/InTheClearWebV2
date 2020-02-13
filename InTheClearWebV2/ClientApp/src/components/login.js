@@ -11,11 +11,16 @@ class Login extends Component {
 
     constructor(props){
         super(props)
+
+        this.state = {
+            token: ""
+        }
+
     }
 
     componentDidMount() {
 
-        firebase.auth().onAuthStateChanged(function(user){
+        firebase.auth().onAuthStateChanged((user) => {
             if(user){
                 let data = user.providerData
                 let name = user.providerData.find(user => user.displayName != null)
@@ -38,6 +43,9 @@ class Login extends Component {
         Axios.post('/api/User/Auth', userObj)
         .then(res => {
             if(res.status == 200){
+                //need to implement Redux for User ID and Token
+                Axios.defaults.defaults.commons["Authorization"] = this.state.token
+
                 this.props.history.push("/")
             }
         }).catch(err => {
@@ -47,6 +55,9 @@ class Login extends Component {
 
     signInUser = (provider) => {
         firebase.auth().signInWithPopup(provider)
+        .then(result => {
+            this.setState({token: result.credential.accessToken})
+        })
         .catch(function(error) {
             alert("Issue Signing You In!")
             console.log(error);
