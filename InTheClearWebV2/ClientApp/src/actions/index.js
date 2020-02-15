@@ -1,12 +1,12 @@
 export const LOGIN = "LOGIN"
 
-export const setLoginInfo = (user, token) => {
+export const setLoginInfo = (user) => {
     return {
         type: LOGIN,
         payload: {
             id: user.id,
             name: user.displayName,
-            token: token
+            paid: user.paid
         }
     }
 }

@@ -3,6 +3,8 @@ import UserInfo from './UserInfo';
 import '../App.css';
 import '../style/GooglePlaces.css';
 import Jumbotron from 'react-bootstrap/Jumbotron';
+import {connect} from "react-redux";
+import {mapStatetoProps} from '../container/loginContainer'
 import logo from '../images/InTheClear.png';
 
 
@@ -74,7 +76,7 @@ class GooglePlaces extends Component {
             <Jumbotron className="directionsJumbotron ml-md-2 mt-md-2 col-5">
                 <div className="row justify-content-between">
                     <img className="d-block img-logo-places mb-1 ml-3" alt="logo" src={logo}></img>
-                    <UserInfo name={this.props.name} />
+                    { this.props.name && <UserInfo name={this.props.name} /> }
                 </div>
                 <div className="input-group mb-1 mt-4">
                     <input className="form-control" id="locationStart" type="text" size="50" placeholder="Start Location" autoComplete="on" runat="server" />
@@ -88,4 +90,4 @@ class GooglePlaces extends Component {
       }
 }
 
-export default GooglePlaces;
+export default connect(mapStatetoProps)(GooglePlaces);

@@ -3,7 +3,7 @@ import { combineReducers } from 'redux'
 const initialState = {
     id: "",
     name: "",
-    token: ""
+    paid: ""
 }
 
 export const loginInfo = (state = initialState, action) => {

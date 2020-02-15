@@ -41,13 +41,13 @@ class Login extends Component {
             id: attributes.uid
         }
 
-        //need to implement Redux for User ID and Token
+        //Set Auth Token as Global
         Axios.defaults.headers.common['Authorization'] = "Bearer " + token
         
         Axios.post('/api/User/Auth', userObj)
         .then(res => {
             if(res.status == 200){
-                this.props.dispatch(setLoginInfo(res.data, token))
+                this.props.dispatch(setLoginInfo(res.data))
                 this.props.history.push("/")
             }
         }).catch(err => {
