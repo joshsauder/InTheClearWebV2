@@ -41,6 +41,13 @@ class GoogleMap extends PolylineGenerator {
           this.setState({loaded: true})
           this.googleMaps = this.createMap()
         })
+
+        if(this.props.paid == false){
+          (window.adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3392285421215074",
+            enable_page_level_ads: true
+          });
+        }
       }
 
       componentDidUpdate(prevProps, prevState){
