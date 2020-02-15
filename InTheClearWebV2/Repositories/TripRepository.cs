@@ -21,16 +21,16 @@ namespace InTheClearWebV2.Repositories
             
         }
 
-        public Trip GetTrip(int UserId, Guid tripId)
+        public Trip GetTrip(String UserId, Guid tripId)
         {
             return context.Trips
-                .Single(trip => trip.TripId == tripId && trip.UserId == UserId);
+                .Single(trip => trip.TripId == tripId && trip.UserId.Equals(UserId));
         }
 
-        public List<Trip> GetUserTrips(int UserId)
+        public List<Trip> GetUserTrips(String UserId)
         {
             return context.Trips
-                .Where(trip => trip.UserId == UserId)
+                .Where(trip => trip.UserId.Equals(UserId))
                 .OrderBy(trip => trip.CreatedAt)
                 .ToList();
             

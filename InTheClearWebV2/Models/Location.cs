@@ -13,8 +13,8 @@ namespace InTheClearWebV2.Models
         public String City { get; set; }
         public String Condition { get; set; }
         public int Temperature { get; set; }
-        public float Latitude {get; set;}
-        public float Longitiude {get; set;}
+        public double Latitude {get; set;}
+        public double Longitude {get; set;}
         public Guid TripId { get; set; }
 
         [ForeignKey("TripId")]

@@ -11,7 +11,7 @@ namespace InTheClearWebV2.Models
         [Key]
         public Guid TripId { get; set; }
         [Required]
-        public int UserId { get; set; }
+        public String UserId { get; set; }
         public int Duration { get; set; }
         public int Distance { get; set; }
         public DateTime CreatedAt { get; set; }

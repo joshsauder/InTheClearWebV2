@@ -12,10 +12,6 @@ class Login extends Component {
     constructor(props){
         super(props)
 
-        this.state = {
-            token: ""
-        }
-
     }
 
     componentDidMount() {
@@ -25,13 +21,15 @@ class Login extends Component {
                 let data = user.providerData
                 let name = user.providerData.find(user => user.displayName != null)
                 
-                //name could be undefined if name is never given
-                name ? this.submitNewUser(name) : this.submitNewUser(data[0])
+                user.getIdToken().then(token => {
+                    //name could be undefined if name is never given
+                    name ? this.submitNewUser(name, token) : this.submitNewUser(data[0], token)
+                })
             }
         })
     }
 
-    submitNewUser = (attributes) => {      
+    submitNewUser = (attributes, token) => {      
 
         const userObj = {
             displayName: attributes.displayName,
@@ -40,12 +38,12 @@ class Login extends Component {
             id: attributes.uid
         }
 
+        //need to implement Redux for User ID and Token
+        Axios.defaults.headers.common['Authorization'] = "Bearer " + token
+        
         Axios.post('/api/User/Auth', userObj)
         .then(res => {
             if(res.status == 200){
-                //need to implement Redux for User ID and Token
-                Axios.defaults.defaults.commons["Authorization"] = this.state.token
-
                 this.props.history.push("/")
             }
         }).catch(err => {
@@ -55,9 +53,6 @@ class Login extends Component {
 
     signInUser = (provider) => {
         firebase.auth().signInWithPopup(provider)
-        .then(result => {
-            this.setState({token: result.credential.accessToken})
-        })
         .catch(function(error) {
             alert("Issue Signing You In!")
             console.log(error);
