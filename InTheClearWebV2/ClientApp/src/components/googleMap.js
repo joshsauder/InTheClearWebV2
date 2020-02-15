@@ -1,11 +1,13 @@
-import React, {Component, createRef} from 'react';
+import React, {createRef} from 'react';
 import GooglePlaces from './GooglePlaces';
 import PolylineGenerator from './PolylineGenerator';
 import CityData from './CityData';
 import TripStopsContainer from './TripStops/TripStopsContainer';
 import {TripsModel} from '../models/trips';
+import {mapStatetoProps} from '../container/loginContainer'
 import {Button} from 'react-bootstrap'
 import Axios from 'axios';
+import {connect} from "react-redux";
 import googleMapsImg from '../images/icons8-google-maps-48.png'
 import '../App.css';
 import '../style/GoogleMaps.css'
@@ -22,7 +24,6 @@ class GoogleMap extends PolylineGenerator {
           endMarker: null,
           tripData: new TripsModel(),
           showStopModal: false,
-          userId: ""
         }
         this.showDirections = this.showDirections.bind(this);
         this.polylineArray = []
@@ -91,7 +92,7 @@ class GoogleMap extends PolylineGenerator {
           tripData.duration = directionsData[2]
           tripData.distance = directionsData[3]
 
-          this.postStops(tripData.tripData, tripData.distance, tripData.duration)
+          this.postStops(tripData)
           this.setState({
             tripData: tripData
           })
@@ -99,20 +100,23 @@ class GoogleMap extends PolylineGenerator {
       }
 
 
-      postStops = (tripData, distance, duration) => {
+      postStops = (tripData) => {
         //save each stop
-        const data = tripData.map(trip => {
+        console.log(tripData)
+        const data = tripData.tripData.map((trip, index) => {
           return {
             City: trip.city,
             Condition: trip.weather.Description,
-            Temperature: Math.round(trip.weather.Temperature)
+            Temperature: Math.round(trip.weather.Temperature),
+            Latitude: tripData.stops[index].lat,
+            Longitude: tripData.stops[index].lng
           }
         })
 
         const postData = {
-          UserId: this.state.userId,
-          Duration: duration,
-          Distance: distance,
+          UserId: this.props.id,
+          Duration: tripData.duration,
+          Distance: tripData.distance,
           Locations: data
         }
         
@@ -209,4 +213,4 @@ class GoogleMap extends PolylineGenerator {
     
 }
 
-export default GoogleMap;
+export default connect(mapStatetoProps)(GoogleMap);

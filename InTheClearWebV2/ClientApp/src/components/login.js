@@ -5,6 +5,9 @@ import Axios from 'axios';
 import "../style/login.css"
 import * as firebase from 'firebase';
 import { getGoogleAuth, getAppleAuth } from '../services/authSetup';
+import { connect } from 'react-redux'
+import {setLoginInfo} from '../actions'
+
 import apple from "../images/appleSignIn.png"
 
 class Login extends Component {
@@ -44,6 +47,7 @@ class Login extends Component {
         Axios.post('/api/User/Auth', userObj)
         .then(res => {
             if(res.status == 200){
+                this.props.dispatch(setLoginInfo(res.data, token))
                 this.props.history.push("/")
             }
         }).catch(err => {
@@ -83,4 +87,4 @@ class Login extends Component {
     }
 } 
 
-export default Login
+export default connect()(Login)

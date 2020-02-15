@@ -1,26 +1,28 @@
 import React from 'react';
 import {Switch, Route, BrowserRouter} from 'react-router-dom'
+import * as firebase from 'firebase';
+import "firebase/analytics";
+import "firebase/auth";
+import { Provider } from 'react-redux'
+
 import GoogleMap from "./components/googleMap";
 import Login from "./components/login";
 import withAuth from "./services/authService";
-import * as firebase from 'firebase';
-import config from "./firebaseConfig.json";
-import "firebase/analytics";
-import "firebase/auth";
 
+import config from "./firebaseConfig.json";
 
 firebase.initializeApp(config);
 
-function App() {
+const App = ({store}) => {
   return (
-    <div >
+    <Provider store={store}>
       <BrowserRouter>
         <Switch>
           <Route path="/login" component={Login}/>
           <Route path="" component={withAuth(GoogleMap)}/>
         </Switch>
       </BrowserRouter>
-    </div>
+    </Provider>
   );
 }
 
