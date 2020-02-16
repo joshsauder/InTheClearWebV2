@@ -109,15 +109,22 @@ class GoogleMap extends PolylineGenerator {
 
       postStops = (tripData) => {
         //save each stop
-        console.log(tripData)
-        const data = tripData.tripData.map((trip, index) => {
-          return {
-            City: trip.city,
-            Condition: trip.weather.Description,
-            Temperature: Math.round(trip.weather.Temperature),
-            Latitude: tripData.stops[index].lat,
-            Longitude: tripData.stops[index].lng
-          }
+        //need to use for each, in the small case the trip does not exist (unincorperated towns).
+        const data = []
+        tripData.stops.forEach(stop => {
+          let trip = tripData.tripData.filter(trip =>{
+            return String(trip.city).indexOf(String(stop.name)) > -1
+          })[0]
+          if(trip){
+            data.push(
+            {
+              City: trip.city,
+              Condition: trip.weather.Description,
+              Temperature: Math.round(trip.weather.Temperature),
+              Latitude: stop.lat,
+              Longitude: stop.lng
+          })
+        }
         })
 
         const postData = {
