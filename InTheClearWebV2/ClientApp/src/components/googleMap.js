@@ -123,8 +123,8 @@ class GoogleMap extends PolylineGenerator {
               Temperature: Math.round(trip.weather.Temperature),
               Latitude: stop.lat,
               Longitude: stop.lng
-          })
-        }
+            })
+          }
         })
 
         const postData = {
@@ -227,4 +227,5 @@ class GoogleMap extends PolylineGenerator {
     
 }
 
+//get user props from redux
 export default connect(mapStatetoProps)(GoogleMap);

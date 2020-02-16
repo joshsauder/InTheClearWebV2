@@ -22,6 +22,7 @@ class Login extends Component {
         firebase.auth().onAuthStateChanged((user) => {
             if(user){
                 let data = user.providerData
+                //display name may not be shown with apple sign in
                 let name = user.providerData.find(user => user.displayName != null)
                 
                 user.getIdToken().then(token => {
@@ -47,6 +48,7 @@ class Login extends Component {
         Axios.post('/api/User/Auth', userObj)
         .then(res => {
             if(res.status == 200){
+                //send to redux
                 this.props.dispatch(setLoginInfo(res.data))
                 this.props.history.push("/")
                 

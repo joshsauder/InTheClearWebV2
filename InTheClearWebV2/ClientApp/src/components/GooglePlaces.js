@@ -90,4 +90,5 @@ class GooglePlaces extends Component {
       }
 }
 
+//get user props from Redux
 export default connect(mapStatetoProps)(GooglePlaces);
