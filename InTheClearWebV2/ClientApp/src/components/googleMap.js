@@ -109,9 +109,10 @@ class GoogleMap extends PolylineGenerator {
 
       postStops = (tripData) => {
         //save each stop
-        //need to use for each, in the small case the trip does not exist (unincorperated towns).
+        //need to use forEach in the small case the trip does not exist (unincorperated towns).
         const data = []
         tripData.stops.forEach(stop => {
+          //get first occurance
           let trip = tripData.tripData.filter(trip =>{
             return String(trip.city).indexOf(String(stop.name)) > -1
           })[0]
