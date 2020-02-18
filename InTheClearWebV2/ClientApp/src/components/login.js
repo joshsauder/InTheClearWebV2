@@ -73,7 +73,10 @@ class Login extends Component {
                         <h2 className="text-purple">Welcome Back :)</h2>
                     </div>
                     <div className="row justify-content-center">
-                        <p className="text-purple">Please login using either Apple or Google to continue.</p>
+                        <div className="text-purple">Please login using either Apple or Google to continue.</div>
+                    </div>
+                    <div className="row justify-content-center">
+                        <div className="text-purple">And as always, happy travels!   &#128663;</div>
                     </div>
                     <div className="row justify-content-center">
                         <StyledFirebaseAuth uiConfig={options} firebaseAuth={firebase.auth()} />
