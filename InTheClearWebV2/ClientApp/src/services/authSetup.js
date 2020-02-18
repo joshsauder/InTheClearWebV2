@@ -1,16 +1,20 @@
 import * as firebase from 'firebase';
 
-
-export const getGoogleAuth = () => {
-    let provider = new firebase.auth.GoogleAuthProvider()
-    provider.addScope('email')
-    provider.addScope('profile')
-    return provider;
-}
-
-export const getAppleAuth = () => {
-    let provider = new firebase.auth.OAuthProvider('apple.com')
-    provider.addScope('email');
-    provider.addScope('name');
-    return provider;
+export const options = {
+    callbacks: {
+        // Avoid redirects after sign-in.
+        signInSuccessWithAuthResult: () => false
+    },
+    signInFlow: 'popup',
+    signInOptions :
+    [
+        {
+            provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            scopes: ['email', 'profile']
+        },
+        {
+            provider: 'apple.com',
+            scopes: ["email", "name"]
+        }
+    ]
 }

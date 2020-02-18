@@ -9,6 +9,8 @@ import GoogleMap from "./components/googleMap";
 import Login from "./components/login";
 import withAuth from "./services/authService";
 
+import './App.css'
+
 import config from "./firebaseConfig.json";
 
 firebase.initializeApp(config);

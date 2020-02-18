@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router';
 import UserInfo from './UserInfo';
 import '../App.css';
 import '../style/GooglePlaces.css';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import {connect} from "react-redux";
 import {mapStatetoProps} from '../container/loginContainer'
+import {setLoginInfo} from '../actions'
 import logo from '../images/InTheClear.png';
+import Axios from 'axios';
+import * as firebase from 'firebase'
 
 
 class GooglePlaces extends Component {
@@ -70,13 +74,23 @@ class GooglePlaces extends Component {
 
       }
 
+      handleLogout = () => {
+        firebase.auth().signOut();
+        Axios.defaults.headers.common['Authorization'] = ""
+
+        let initState = { id: "", displayName: "", paid: ""}
+        this.props.dispatch(setLoginInfo(initState))
+
+        this.props.history.push('/login')
+      }
+
       render() {
           return (
           <div className="row container">
             <Jumbotron className="directionsJumbotron ml-md-2 mt-md-2 col-5">
                 <div className="row justify-content-between">
                     <img className="d-block img-logo-places mb-1 ml-3" alt="logo" src={logo}></img>
-                    { this.props.name && <UserInfo name={this.props.name} /> }
+                    <UserInfo name={this.props.name} logout={this.handleLogout} /> 
                 </div>
                 <div className="input-group mb-1 mt-4">
                     <input className="form-control" id="locationStart" type="text" size="50" placeholder="Start Location" autoComplete="on" runat="server" />
@@ -91,4 +105,4 @@ class GooglePlaces extends Component {
 }
 
 //get user props from Redux
-export default connect(mapStatetoProps)(GooglePlaces);
+export default withRouter(connect(mapStatetoProps)(GooglePlaces));

@@ -38,7 +38,7 @@ label {
     overflow: scroll
 }
 
-.signin-button {
-    width: 240px;
-    height: 48px;
+.firebaseui-idp-generic {
+    background-color: #000 !important;
+    border-color: #000 !important;
 }
