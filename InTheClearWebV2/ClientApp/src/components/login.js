@@ -67,14 +67,17 @@ class Login extends Component {
 
         return(
             <LoginContainer>
-            <div className="container">
-                <div className="row justify-content-md-center mt-4">
-                    <Card className="col-5" style={{maxHeight: '60vh'}}>
-                        <Card.Header className="headerFont">Login</Card.Header>
-                        <Card.Body>
-                            <StyledFirebaseAuth uiConfig={options} firebaseAuth={firebase.auth()} />
-                        </Card.Body>
-                    </Card>
+            <div className="row">
+                <div className="col-12 my-auto">
+                    <div className="row justify-content-center">
+                        <h2 className="text-purple">Welcome Back :)</h2>
+                    </div>
+                    <div className="row justify-content-center">
+                        <p className="text-purple">Please login using either Apple or Google to continue.</p>
+                    </div>
+                    <div className="row justify-content-center">
+                        <StyledFirebaseAuth uiConfig={options} firebaseAuth={firebase.auth()} />
+                    </div>
                 </div>
             </div>
             </LoginContainer>

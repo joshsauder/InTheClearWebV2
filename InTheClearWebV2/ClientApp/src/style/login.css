@@ -1,44 +1,18 @@
-
-label {
-    color: white;
-}
-
-.headerFont {
-    color: white;
-    font-size: 1.5rem;
-    background-color: #7B16F5 !important;
-}
-
-.imageBackground {
-    background: url('../images/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    height: 100%; 
-    
-    min-height: 100%;
-    min-width: 1024px;
-
-    width: 100%;
-    height: auto;
-        
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
 .img-logo {
     height: auto;
-    width: 25%;
-}
-
-.card{
-    background-color: #7B16F5 !important;
-    color: white;
-    border-radius: 1rem !important;
-    max-height: 50vh;
-    overflow: scroll
+    width: 15%;
 }
 
 .firebaseui-idp-generic {
     background-color: #000 !important;
     border-color: #000 !important;
+}
+
+.text-purple {
+    color: #7B16F5;
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+.body{
+    background-color: #F5F5F5
 }
