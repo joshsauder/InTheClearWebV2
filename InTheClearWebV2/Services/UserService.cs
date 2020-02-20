@@ -25,6 +25,7 @@ namespace InTheClearWebV2.Services
 
             if (foundUser == null)
             {
+                user.Id = System.Guid.NewGuid();
                 user.CreatedAt = DateTime.Now;
                 user.UpdatedAt = DateTime.Now;
                 repository.CreateUser(user);
@@ -48,7 +49,7 @@ namespace InTheClearWebV2.Services
         {
             return new UserResponse()
             {
-                Id = user.Id,
+                Id = user.Id.ToString(),
                 DisplayName = user.DisplayName,
                 Email = user.Email,
                 Paid = user.Paid,

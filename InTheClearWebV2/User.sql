@@ -1,6 +1,6 @@
 CREATE TABLE [dbo].[User] 
 (
-    Id VARCHAR(128) PRIMARY KEY,
+    Id UNIQUEIDENTIFIER PRIMARY KEY,
     DisplayName NVARCHAR(MAX),
     Email NVARCHAR(60) NOT NULL,
     Paid Bit NOT NULL,

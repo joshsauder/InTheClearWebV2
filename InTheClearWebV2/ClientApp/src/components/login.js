@@ -37,8 +37,7 @@ class Login extends Component {
         const userObj = {
             displayName: attributes.displayName,
             email: attributes.email,
-            paid: false,
-            id: attributes.uid
+            paid: false
         }
 
         //Set Auth Token as Global

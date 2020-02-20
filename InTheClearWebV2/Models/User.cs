@@ -8,7 +8,7 @@ namespace InTheClearWebV2.Models
     [Table("User")]
     public class User
     {
-        public String Id { get; set; }
+        public Guid Id { get; set; }
         public string DisplayName { get; set; }
         [Required]
         public string Email { get; set; }
