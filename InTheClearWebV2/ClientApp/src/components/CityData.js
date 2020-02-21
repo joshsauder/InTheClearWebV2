@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Jumbotron, Spinner} from 'react-bootstrap';
+import {Jumbotron, Spinner, Button} from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
+
 import '../style/CityData.css';
+
 import cloudy from '../images/cloud.png';
 import cloudNight from '../images/CloudyNight.png';
 import danger from '../images/danger.png';
@@ -11,6 +13,7 @@ import rain from '../images/rain.png';
 import snow from '../images/snow.png';
 import sun from '../images/sun.png';
 import arrow from '../images/arrow-right-solid.svg'
+import expand from '../images/expand_more-24px.svg'
 
 
 function RenderCityData(props){
@@ -87,7 +90,12 @@ class CityData extends Component {
     render(){
         return(
             <div className="row container">
-                <Jumbotron className = "ml-md-2 col-5 cityDataJumbotron">
+                <Jumbotron className = "ml-2 col-md-5 col-12 cityDataJumbotron">
+                    <div className="d-flex justify-content-center">
+                        <Button className="transparentButton" onClick={this.props.hide}>
+                            <img src={expand} style={{opacity: '0.7'}} alt="Close" />
+                        </Button>
+                    </div>
                     {this.props.cityData.tripData.length > 0 ? 
                     <RenderCityData cityData={this.props.cityData}/> :
                     <div className="d-flex justify-content-center">

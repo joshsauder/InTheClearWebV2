@@ -87,7 +87,7 @@ class GooglePlaces extends Component {
       render() {
           return (
           <div className="row container">
-            <Jumbotron className="directionsJumbotron ml-md-2 mt-md-2 col-5">
+            <Jumbotron className="directionsJumbotron ml-2 mt-2 col-md-5 col-12">
                 <div className="row justify-content-between">
                     <img className="d-block img-logo-places mb-1 ml-3" alt="logo" src={logo}></img>
                     <UserInfo name={this.props.name} logout={this.handleLogout} /> 

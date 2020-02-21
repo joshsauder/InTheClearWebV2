@@ -202,11 +202,13 @@ class GoogleMap extends PolylineGenerator {
       render() {
         let googleMapsUrl = this.determineUrl()
         let modalClose = () => this.setState({ showStopModal: false });
+        let closeCityData = () => { this.setState({showCityData: false}) }
+
         return (
           <div>
             <div className="map" ref={this.GoogleMapsRef} />
               { this.state.loaded ? <GooglePlaces callbackStart={this.callbackStart} callbackEnd={this.callbackEnd} /> : null }
-              { this.state.showCityData ? <CityData cityData={this.state.tripData}/> : null}
+              { this.state.showCityData && <CityData cityData={this.state.tripData} hide={closeCityData} /> }
               { this.state.loaded ? 
                 <TripStopsContainer 
                 show={this.state.showStopModal} 

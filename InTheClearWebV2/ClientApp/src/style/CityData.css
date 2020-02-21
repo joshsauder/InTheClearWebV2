@@ -52,3 +52,12 @@ text-white{
 .lead{
     font-size: 1rem !important;
 }
+
+.transparentButton {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.image-fade {
+    opacity:0.8;
+}
