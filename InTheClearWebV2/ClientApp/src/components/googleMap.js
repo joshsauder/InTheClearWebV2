@@ -78,6 +78,10 @@ class GoogleMap extends PolylineGenerator {
 
       async showDirections(stops, dates){
           this.setState({showStopModal: false, showCityData: true})
+
+          //revert polyline generate to its initial state
+          this.revertToInitState()
+
           this.polylineArray.forEach(line => {
             line.setMap(null)
           })
@@ -86,7 +90,7 @@ class GoogleMap extends PolylineGenerator {
 
           //set stops
           var tripData = Object.assign({}, this.state.tripData)
-          tripData.stops = Object.assign([], stops)
+          tripData.stops = [...stops]
 
           //get directions with times
           var directionsData = await this.createPolylineAndWeatherData(stops, this.googleMaps, bounds, dates)
@@ -94,9 +98,10 @@ class GoogleMap extends PolylineGenerator {
           this.googleMaps.fitBounds(directionsData[0])
 
           //set trip data
-          tripData.tripData = directionsData[1]
+          tripData.tripData = [...directionsData[1]]
           tripData.duration = directionsData[2]
           tripData.distance = directionsData[3]
+          console.log(tripData)
 
           this.postStops(tripData)
           this.setState({

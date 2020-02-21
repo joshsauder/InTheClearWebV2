@@ -20,6 +20,14 @@ class PolylineGenerator extends Component {
         
     }
 
+    revertToInitState() {
+        this.cityWeather =[]
+        //prevent duplicate cities
+        this.cityTemp = []
+        this.duration = 0
+        this.distance = 0
+    }
+
     async createPolylineAndWeatherData(stops, map, bounds, dates){
 
         await this.generatePolyline(stops[0], stops[1], map, bounds, dates.shift())   
@@ -65,8 +73,6 @@ class PolylineGenerator extends Component {
             const response_1 = await axios.post("/api/Directions/Info", stepObj);
             var weather = JSON.parse(response_1.data.weather);
             var cities = JSON.parse(response_1.data.locations);
-            
-            console.log(cities)
             
             this.weatherPerStep(steps, path, weather, map);
             for (var i = 0; i < path.length; i++) {
