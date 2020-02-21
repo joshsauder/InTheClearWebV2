@@ -1,6 +1,7 @@
 .cityDataJumbotron{
     background-color: #7B16F5 !important;
     position: relative;
+    z-index: 1;
 }
 
 .menuScroll{
@@ -56,8 +57,4 @@ text-white{
 .transparentButton {
     background-color: transparent !important;
     border-color: transparent !important;
-}
-
-.image-fade {
-    opacity:0.8;
 }
