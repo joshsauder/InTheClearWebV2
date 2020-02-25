@@ -30,6 +30,10 @@ namespace InTheClearWebV2
 
             services.AddDbContext<EntityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("InTheClearContext")));
 
+            //add App Settings
+            services.AddSingleton(Configuration);
+
+            //Add each interface with its implementation
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<ITripRepository, TripRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
