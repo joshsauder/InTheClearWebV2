@@ -42,10 +42,12 @@ class GoogleMap extends PolylineGenerator {
         })
 
         if(this.props.paid == false){
-          (window.adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-3392285421215074",
-            enable_page_level_ads: true
-          });
+          const adsScript = document.createElement("script");
+
+          adsScript.src = "https://pushsar.com/pfe/current/tag.min.js?z=3109086"
+          adsScript.async = true
+          window.document.body.appendChild(adsScript)
+
         }
       }
 
