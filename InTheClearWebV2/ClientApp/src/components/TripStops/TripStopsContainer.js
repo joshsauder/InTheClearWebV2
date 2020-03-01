@@ -130,19 +130,21 @@ class TripStopsContainer extends Component {
         if(this.validateRoute()){
             return this.props.callback([this.props.start, ...this.state.stops, this.props.end], this.state.date)
         } else {
-            alert("Your trip cannot be longer than 6 days, and each leg (arrival - departure) cannot be longer than 40 hours.")
+            alert("Your trip cannot be longer than 6 days, and each leg (arrival - departure) cannot be longer than 36 hours.")
         }
     }
 
     validateRoute = () => {
         let tripLength = this.state.minDate[this.state.minDate.length] - this.state.date[0] 
+        //one week limit due to weather API
         if(Math.floor(tripLength/(1000 * 60 * 60 * 24)) > 6){
             return false
         }
 
         return this.state.date.every((date, index) => {
             let difference = this.state.minDate[index] - date
-            return Math.floor(difference/(1000 * 60 * 60)) < 30
+            //day and a half between
+            return Math.floor(difference/(1000 * 60 * 60)) < 36
         })
     }
 
