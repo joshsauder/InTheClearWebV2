@@ -63,6 +63,7 @@ class RouteDataView extends Component {
     render(){
         var options = { weekday: 'short', hour: 'numeric', minute: 'numeric', timeZoneName: 'short'}
         var minTime = this.props.minDate[this.props.minDate.length-1] ? this.props.minDate[this.props.minDate.length-1].toLocaleDateString('en-US', options) : ""
+
         return (
             <div className="container">
                 <h4 className="row">Current Route</h4>
