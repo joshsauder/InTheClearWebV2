@@ -144,7 +144,7 @@ class TripStopsContainer extends Component {
         return this.state.date.every((date, index) => {
             let difference = this.state.minDate[index] - date
             //day and a half between
-            return Math.floor(difference/(1000 * 60 * 60)) < 48
+            return Math.floor(difference/(1000 * 60 * 60)) < 47
         })
     }
 
