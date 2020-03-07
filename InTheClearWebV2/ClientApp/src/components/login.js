@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Card, Button} from 'react-bootstrap'
 import LoginContainer from './loginContainer'
 import Axios from 'axios';
 import "../style/login.css"
@@ -9,7 +8,7 @@ import {options} from '../services/authSetup';
 import { connect } from 'react-redux'
 import {setLoginInfo} from '../actions'
 
-class Login extends Component {
+export class Login extends Component {
 
     constructor(props){
         super(props)
