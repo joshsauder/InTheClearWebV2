@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import LoginContainer from './loginContainer'
 import Axios from 'axios';
 import "../style/login.css"
-import * as firebase from 'firebase';
+import firebase from 'firebase/app'
+import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import {options} from '../services/authSetup';
 import { connect } from 'react-redux'

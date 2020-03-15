@@ -9,7 +9,8 @@ import {mapStatetoProps} from '../container/loginContainer'
 import {setLoginInfo} from '../actions'
 import logo from '../images/InTheClear.png';
 import Axios from 'axios';
-import * as firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth';
 
 
 class GooglePlaces extends Component {

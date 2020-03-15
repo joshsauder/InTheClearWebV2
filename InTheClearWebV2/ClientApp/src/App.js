@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch, Route, BrowserRouter} from 'react-router-dom'
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 import "firebase/analytics";
 import "firebase/auth";
 import { Provider } from 'react-redux'

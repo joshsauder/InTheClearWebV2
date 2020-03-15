@@ -3,7 +3,7 @@ import Enzyme, { shallow, mount } from 'enzyme';
 import {Login} from '../components/login';
 import 'jest-enzyme'
 import Adapter from 'enzyme-adapter-react-16';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 import "firebase/analytics";
 import "firebase/auth";
 
