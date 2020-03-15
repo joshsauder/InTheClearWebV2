@@ -125,8 +125,6 @@ class TripStopsContainer extends Component {
     };
 
     onSubmit = () => {
-
-        console.log(this.validateRoute())
         if(this.validateRoute()){
             return this.props.callback([this.props.start, ...this.state.stops, this.props.end], this.state.date)
         } else {

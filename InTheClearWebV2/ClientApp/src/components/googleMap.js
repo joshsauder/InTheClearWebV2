@@ -44,7 +44,8 @@ class GoogleMap extends PolylineGenerator {
         if(this.props.paid == false){
           const adsScript = document.createElement("script");
 
-          adsScript.src = "https://pushsar.com/pfe/current/tag.min.js?z=3109086"
+          adsScript.type = "text/javascript"
+          adsScript.src = "//onemboaran.com/apu.php?zoneid=3132718"
           adsScript.async = true
           window.document.body.appendChild(adsScript)
 
@@ -103,7 +104,6 @@ class GoogleMap extends PolylineGenerator {
           tripData.tripData = [...directionsData[1]]
           tripData.duration = directionsData[2]
           tripData.distance = directionsData[3]
-          console.log(tripData)
 
           this.postStops(tripData)
           this.setState({
