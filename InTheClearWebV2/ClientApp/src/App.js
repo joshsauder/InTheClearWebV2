@@ -14,6 +14,7 @@ import './App.css'
 import config from "./firebaseConfig.json";
 
 firebase.initializeApp(config);
+firebase.analytics();
 
 const App = ({store}) => {
   return (
