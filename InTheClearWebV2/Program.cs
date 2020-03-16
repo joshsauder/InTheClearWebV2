@@ -18,6 +18,11 @@ namespace InTheClearWebV2
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureLogging(logging =>
+                {
+                    logging.AddAWSProvider();
+                    logging.SetMinimumLevel(LogLevel.Debug);
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
