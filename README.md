@@ -1,10 +1,13 @@
-# In The Clear Web App Version 2
+# In The Clear Web App
 
-### A web-app that will give the user all the features of the [iOS App](https://itunes.apple.com/us/app/in-the-clear/id1458058092?ls=1&mt=8). This app has been released and can be viewed at [app.intheclearapp.com](https://app.intheclearapp.com). It was deployed using AWS ECS, and the AWS Application Load Balancer
+### A web-app that gives the user all the features of the [iOS App](https://itunes.apple.com/us/app/in-the-clear/id1458058092?ls=1&mt=8). This app has been released and can be viewed at [app.intheclearapp.com](https://app.intheclearapp.com). It was deployed using AWS ECS, and the AWS Application Load Balancer
 
 ## Tech Stack
 1. [ReactJS](https://reactjs.org) - Javascript Framework
 2. [Bootstrap](https://getbootstrap.com) - CSS Framework
+3. [Redux](https://redux.js.org) - State Manager
+4. [Jest](https://jestjs.io) - Javascript Test Framework
+5. [Enzyme](https://enzymejs.github.io/enzyme/) - React Test Framework
 3. [.Net Core](https://docs.microsoft.com/en-us/dotnet/core/) - Backend Framework
 4. [AWS RDS SQL Server](https://aws.amazon.com/rds/sqlserver/) - Database
 5. [Docker](https://www.docker.com) - Delivers software in containers
