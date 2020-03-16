@@ -19,10 +19,6 @@ namespace InTheClearWebV2.Repositories
         public void AddLocations(Location[] locations)
         {
             context.Locations.AddRange(locations);
-        }
-
-        public void Save()
-        {
             context.SaveChanges();
         }
     }

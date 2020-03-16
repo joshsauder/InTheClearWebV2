@@ -8,7 +8,6 @@ namespace InTheClearWebV2.Repositories
         public void AddTrip(Trip trip);
         public Trip GetTrip(String UserId, Guid tripId);
         public List<Trip> GetUserTrips(String UserId);
-        public void Save();
 
     }
 }

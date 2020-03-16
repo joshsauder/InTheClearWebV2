@@ -18,6 +18,7 @@ namespace InTheClearWebV2.Repositories
         public void AddTrip(Trip trip)
         {
             context.Trips.Add(trip);
+            context.SaveChanges();
             
         }
 
@@ -34,11 +35,6 @@ namespace InTheClearWebV2.Repositories
                 .OrderBy(trip => trip.CreatedAt)
                 .ToList();
             
-        }
-
-        public void Save()
-        {
-            context.SaveChanges();
         }
     }
 }

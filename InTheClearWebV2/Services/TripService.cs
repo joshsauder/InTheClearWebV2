@@ -21,7 +21,6 @@ namespace InTheClearWebV2.Services
             trip.CreatedAt = DateTime.Now;
 
             repository.AddTrip(trip);
-            repository.Save();
             
         } 
     }
