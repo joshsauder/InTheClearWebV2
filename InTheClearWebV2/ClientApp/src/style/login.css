@@ -1,6 +1,6 @@
 .img-logo {
     height: auto;
-    width: 15%;
+    max-width: 15%;
 }
 
 .firebaseui-idp-generic {
