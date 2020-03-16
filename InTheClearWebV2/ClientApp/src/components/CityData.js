@@ -30,7 +30,7 @@ function RenderCityData(props){
         <div>
             <Card className="mb-2 shadow rounded">
                 <Card.Body>
-                    <div className="lead row col-12"><b>{props.cityData.startLocation.name}</b><img src={arrow} className="d-block arrow-img ml-2 mr-2"></img><b>{props.cityData.endLocation.name}</b></div>
+                    <div className="lead row col-12" style={{alignItems: "center"}}><b>{props.cityData.startLocation.name}</b><img src={arrow} className="d-block arrow-img ml-2 mr-2"></img><b>{props.cityData.endLocation.name}</b></div>
                     <div className="lead">Distance: {distance} miles</div>
                     <div className="lead">Driving Time: {hourString} {minString}</div>
                 </Card.Body>

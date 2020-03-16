@@ -68,9 +68,10 @@ class RouteDataView extends Component {
             <div className="container">
                 <h4 className="row">Current Route</h4>
                 <div className="row boxedItem mb-2">
-                    <span className="spanText mr-2">{this.props.start.name}</span>
-                    <span className="spanText mr-2">Departure Time:</span>
+                    <span className="spanText mr-1">{this.props.start.name}</span>
+                    <span className="spanText">Departure Time:</span>
                     <Flatpickr data-enable-time
+                    className="ml-1"
                     value={this.props.date[0]}
                     onChange={date => {this.handleDate(date)}} />
                 </div>
@@ -85,7 +86,7 @@ class RouteDataView extends Component {
                 />
                 {minTime !== "" &&
                 <div className="row boxedItem mb-2">
-                    <span className="spanText mr-2">{this.props.end.name}</span>
+                    <span className="spanText mr-1">{this.props.end.name}</span>
                     <span className="spanText">Arrival Time: {minTime}</span>                          
                 </div>
                 }
