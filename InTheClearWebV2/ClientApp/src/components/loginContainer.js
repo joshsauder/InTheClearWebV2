@@ -1,7 +1,7 @@
 import React, {component} from 'react';
 import '../style/login.css'
 import logo from '../images/InTheClearFill.png'
-import { Navbar } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import MainImage from '../images/undraw_road_sign_mfpo.svg'
 
 
@@ -20,6 +20,13 @@ const LoginContainer = (props) => {
                     {props.children}
                 </div>
             </div>
+            <Navbar fixed="bottom">
+                <Nav>
+                    <Nav.Link target="_blank" rel="noopener" href="https://itunes.apple.com/us/app/in-the-clear/id1458058092?ls=1&#38;mt=8">Download The iOS App</Nav.Link>
+                    <Nav.Link target="_blank" rel="noopener" href="https://intheclearapp.com/privacy">Terms Of Service</Nav.Link>
+                    <Nav.Link  target="_blank" rel="noopener" href="https://intheclearapp.com/termsOfService">Privacy Policy</Nav.Link>
+                </Nav>
+            </Navbar>
         </div>
     )
 }
