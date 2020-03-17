@@ -52,9 +52,9 @@ export class Login extends Component {
                 
                 //if current user is not paid, remove from firebase
                 //cost saving...
-                // if(res.data.paid == false){
-                //     firebase.auth().currentUser.delete()
-                // }
+                if(res.data.paid == false){
+                    firebase.auth().currentUser.delete()
+                }
             }
         }).catch(err => {
             alert("There was an issue signing you up! Please try again.")
