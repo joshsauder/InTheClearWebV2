@@ -22,9 +22,9 @@ const LoginContainer = (props) => {
             </div>
             <Navbar fixed="bottom">
                 <Nav>
-                    <Nav.Link target="_blank" rel="noopener" href="https://itunes.apple.com/us/app/in-the-clear/id1458058092?ls=1&#38;mt=8">Download The iOS App</Nav.Link>
+                    <Nav.Link target="_blank" rel="noopener" href="https://itunes.apple.com/us/app/in-the-clear/id1458058092?ls=1&#38;mt=8">Get The iOS App</Nav.Link>
                     <Nav.Link target="_blank" rel="noopener" href="https://intheclearapp.com/privacy">Terms Of Service</Nav.Link>
-                    <Nav.Link  target="_blank" rel="noopener" href="https://intheclearapp.com/termsOfService">Privacy Policy</Nav.Link>
+                    <Nav.Link target="_blank" rel="noopener" href="https://intheclearapp.com/termsOfService">Privacy Policy</Nav.Link>
                 </Nav>
             </Navbar>
         </div>
