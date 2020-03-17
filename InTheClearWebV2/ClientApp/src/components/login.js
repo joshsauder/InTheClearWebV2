@@ -49,15 +49,17 @@ export class Login extends Component {
                 //send to redux
                 this.props.dispatch(setLoginInfo(res.data))
                 this.props.history.push("/")
-                
+
                 //if current user is not paid, remove from firebase
                 //cost saving...
                 if(res.data.paid == false){
                     firebase.auth().currentUser.delete()
                 }
+            }else {
+                alert("There was an issue signing you up! Please try again.")
             }
         }).catch(err => {
-            alert("There was an issue signing you up! Please try again.")
+            console.log(err)
         })
     }
 
