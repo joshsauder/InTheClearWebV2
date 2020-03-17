@@ -105,7 +105,8 @@ class GoogleMap extends PolylineGenerator {
           tripData.duration = directionsData[2]
           tripData.distance = directionsData[3]
 
-          this.postStops(tripData)
+          //if paid, save stops
+          if(this.props.paid == true){ this.postStops(tripData) }
           this.setState({
             tripData: tripData
           })
