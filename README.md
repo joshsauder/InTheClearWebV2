@@ -17,4 +17,4 @@ A web-app that gives the user all the features of the [iOS App](https://itunes.a
 5. [Docker](https://www.docker.com) - Delivers software in containers
 6. [Google Maps API](https://developers.google.com/maps/documentation) - Mapping Service
 
-### The AWS Lambda functions, that are used in the iOS app, are also being utilized in this project. Currently, there are two Lambda functions that handle all weather and reverse geocoding requests. The following [link](https://github.com/joshsauder/InTheClearBackend) will take you to the In The Clear Backend Github Repo.
+The AWS Lambda functions, that were used in the iOS app, are also being utilized in this project. Currently, there are two Lambda functions that handle all weather and reverse geocoding requests. The following [link](https://github.com/joshsauder/InTheClearBackend) will take you to the In The Clear Backend Github Repo.
