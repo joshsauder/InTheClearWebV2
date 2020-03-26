@@ -7,6 +7,7 @@ A web-app that gives the user all the features of the [iOS App](https://itunes.a
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 ## Tech Stack
+
 1. [ReactJS](https://reactjs.org) - Javascript Framework
 2. [Bootstrap](https://getbootstrap.com) - CSS Framework
 3. [Redux](https://redux.js.org) - State Manager
@@ -16,5 +17,7 @@ A web-app that gives the user all the features of the [iOS App](https://itunes.a
 4. [AWS RDS SQL Server](https://aws.amazon.com/rds/sqlserver/) - Database
 5. [Docker](https://www.docker.com) - Delivers software in containers
 6. [Google Maps API](https://developers.google.com/maps/documentation) - Mapping Service
+
+## AWS Lambda Functions
 
 The AWS Lambda functions, that were used in the iOS app, are also being utilized in this project. Currently, there are two Lambda functions that handle all weather and reverse geocoding requests. The following [link](https://github.com/joshsauder/InTheClearBackend) will take you to the In The Clear Backend Github Repo.
