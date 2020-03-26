@@ -55,7 +55,7 @@ export class Login extends Component {
                 if(res.data.paid == false){
                     firebase.auth().currentUser.delete()
                 }
-            }else {
+            } else {
                 alert("There was an issue signing you up! Please try again.")
             }
         }).catch(err => {
