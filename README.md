@@ -1,6 +1,6 @@
 # In The Clear Web App
 
-A web-app that gives the user all the features of the [iOS App](https://itunes.apple.com/us/app/in-the-clear/id1458058092?ls=1&mt=8). This app has been released and can be viewed at [app.intheclearapp.com](https://app.intheclearapp.com). It was deployed using AWS ECS, and the AWS Application Load Balancer
+A web-app that gives the user all the features of the [iOS App](https://itunes.apple.com/us/app/in-the-clear/id1458058092?ls=1&mt=8). This app has been released and can be viewed at [https://app.intheclearapp.com](https://app.intheclearapp.com). It was deployed using AWS ECS, and the AWS Application Load Balancer
 
 ## License
 
