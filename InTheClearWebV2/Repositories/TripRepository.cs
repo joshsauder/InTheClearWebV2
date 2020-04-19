@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using InTheClearWebV2.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace InTheClearWebV2.Repositories
 {
@@ -22,7 +23,7 @@ namespace InTheClearWebV2.Repositories
             
         }
 
-        public Trip GetTrip(String UserId, Guid tripId)
+        public Trip GetTrip(Guid UserId, Guid tripId)
         {
             return context.Trips
                 .Single(trip => trip.TripId == tripId && trip.UserId.Equals(UserId));
@@ -32,6 +33,7 @@ namespace InTheClearWebV2.Repositories
         {
             return context.Trips
                 .Where(trip => trip.UserId.Equals(UserId))
+                .Include(t => t.Locations)
                 .OrderBy(trip => trip.CreatedAt)
                 .ToList();   
         }

@@ -15,7 +15,6 @@ namespace InTheClearWebV2.Models
         public int Duration { get; set; }
         public int Distance { get; set; }
         public DateTime CreatedAt { get; set; }
-
-        public List<Location> Locations { get; set; }
+        public virtual ICollection<Location> Locations { get; set; }
     }
 }
