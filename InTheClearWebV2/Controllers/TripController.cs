@@ -1,6 +1,8 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 
 namespace InTheClearWebV2.Controllers
@@ -27,5 +29,15 @@ namespace InTheClearWebV2.Controllers
             service.AddTrip(trip);
 
         }
+
+q       //GET: api/Locations
+        [HttpGet]
+        [Authorize]
+        public List<Trip> GetTrips(String id)
+        {
+            return service.GetTrips(id);
+
+        }
+
     }
 }

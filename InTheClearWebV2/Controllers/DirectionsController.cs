@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using InTheClearWebV2.Services;
 using InTheClearWebV2.Models;
 using Microsoft.AspNetCore.Authorization;
-using Newtonsoft.Json.Linq;
 
 namespace InTheClearWebV2.Controllers
 {

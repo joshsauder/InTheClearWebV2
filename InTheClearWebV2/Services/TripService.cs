@@ -22,6 +22,11 @@ namespace InTheClearWebV2.Services
 
             repository.AddTrip(trip);
             
+        }
+
+        public List<Trip> GetTrips(String id)
+        {
+            return repository.GetUserTrips(id);
         } 
     }
 }
