@@ -21,16 +21,16 @@ namespace InTheClearWebV2.Controllers
         }
 
 
-        //POST: api/Locations
+        //POST: api/Trip
         [HttpPost]
         [Authorize]
-        public void PostLocations(Trip trip)
+        public void PostTrip(Trip trip)
         {
             service.AddTrip(trip);
 
         }
 
-        //GET: api/Trip
+        //GET: api/Trip?id=<id>
         [HttpGet]
         [Authorize]
         public List<Trip> GetTrips(Guid id)
