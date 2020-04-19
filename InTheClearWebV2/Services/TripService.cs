@@ -24,7 +24,7 @@ namespace InTheClearWebV2.Services
             
         }
 
-        public List<Trip> GetTrips(String id)
+        public List<Trip> GetTrips(Guid id)
         {
             return repository.GetUserTrips(id);
         } 

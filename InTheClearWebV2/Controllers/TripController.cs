@@ -30,10 +30,10 @@ namespace InTheClearWebV2.Controllers
 
         }
 
-q       //GET: api/Locations
+        //GET: api/Trip
         [HttpGet]
         [Authorize]
-        public List<Trip> GetTrips(String id)
+        public List<Trip> GetTrips(Guid id)
         {
             return service.GetTrips(id);
 

@@ -28,13 +28,12 @@ namespace InTheClearWebV2.Repositories
                 .Single(trip => trip.TripId == tripId && trip.UserId.Equals(UserId));
         }
 
-        public List<Trip> GetUserTrips(String UserId)
+        public List<Trip> GetUserTrips(Guid UserId)
         {
             return context.Trips
                 .Where(trip => trip.UserId.Equals(UserId))
                 .OrderBy(trip => trip.CreatedAt)
-                .ToList();
-            
+                .ToList();   
         }
     }
 }

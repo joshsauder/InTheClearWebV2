@@ -7,6 +7,6 @@ namespace InTheClearWebV2.Services
     public interface ITripService
     {
         public void AddTrip(Trip trip);
-        public List<Trip> GetTrips(String id);
+        public List<Trip> GetTrips(Guid id);
     }
 }
