@@ -34,7 +34,7 @@ namespace InTheClearWebV2.Repositories
             return context.Trips
                 .Where(trip => trip.UserId.Equals(UserId))
                 .Include(t => t.Locations)
-                .OrderBy(trip => trip.CreatedAt)
+                .OrderByDescending(trip => trip.CreatedAt)
                 .ToList();   
         }
     }
