@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using InTheClearWebV2.Models;
 using InTheClearWebV2.Repositories;
 
@@ -53,6 +54,7 @@ namespace InTheClearWebV2.Services
                 DisplayName = user.DisplayName,
                 Email = user.Email,
                 Paid = user.Paid,
+                CreatedAt = user.CreatedAt.ToString("u", DateTimeFormatInfo.InvariantInfo)
             };
             
         }

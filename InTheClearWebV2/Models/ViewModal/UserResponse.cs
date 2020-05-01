@@ -7,5 +7,6 @@ namespace InTheClearWebV2.Models
         public string DisplayName { get; set; }
         public string Email { get; set; }
         public bool Paid {get; set;}
+        public String CreatedAt {get; set;}
     }
 }
