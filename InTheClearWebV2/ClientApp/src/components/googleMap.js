@@ -11,6 +11,7 @@ import {connect} from "react-redux";
 import googleMapsImg from '../images/icons8-google-maps-48.png'
 import '../style/GoogleMaps.css'
 import timeImg from '../images/time.png'
+import listImg from '../images/baseline_list_black_24dp.png'
 import TripHistoryContainer from './TripHistory/TripHistoryContainer';
 
 class GoogleMap extends PolylineGenerator {
@@ -227,10 +228,10 @@ class GoogleMap extends PolylineGenerator {
                 callback={this.showDirections} /> 
                 : null }
                 <div className="fix-right btn-group-vertical">
-                <Button className="btn-social p-2 mb-2" onClick={showHistory}>H</Button>
+                <Button className="btn-social p-2 mb-2" onClick={showHistory}><img className="img-button" src={timeImg}></img></Button>
                 { this.state.tripData.distance > 0 &&
                   <React.Fragment>
-                    <Button className="btn-social p-2 mb-2" onClick={editTrip} title="Edit Trip Data"><img className="img-button" src={timeImg} /></Button>
+                    <Button className="btn-social p-2 mb-2" onClick={editTrip} title="Edit Trip Data"><img className="img-button" src={listImg} /></Button>
                     <a className="btn btn-social p-2" target="_blank" href={googleMapsUrl} title="Export to Google Maps"><img className="img-button" src={googleMapsImg}></img></a> 
                   </React.Fragment>
                 }
