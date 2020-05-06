@@ -5,7 +5,7 @@ import '../../style/TripHistory.css'
 import Axios from 'axios'
 import {useSelector} from 'react-redux'
 
-function TripHistoryContainer() {
+function TripHistoryContainer({show, hide}) {
     
     const [trips, setTrips] = useState([])
     const userId = useSelector(state => state.loginInfo.id)
@@ -21,10 +21,15 @@ function TripHistoryContainer() {
     }
 
     return(
-        <Modal show={true}>
+        <Modal show={show} onHide={hide}>
+            <Modal.Header closeButton>
+                <Modal.Title>History</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
             <div className="HistoryContainer">
                 {trips.map(trip => <PastStops stop={trip} selectStop={tripSelected}/>)}
             </div>
+            </Modal.Body>
         </Modal>
     )
     

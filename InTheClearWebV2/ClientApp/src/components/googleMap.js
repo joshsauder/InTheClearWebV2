@@ -24,6 +24,7 @@ class GoogleMap extends PolylineGenerator {
           endMarker: null,
           tripData: new TripsModel(),
           showStopModal: false,
+          showHistoryModal: false
         }
         this.showDirections = this.showDirections.bind(this);
         this.polylineArray = []
@@ -203,20 +204,18 @@ class GoogleMap extends PolylineGenerator {
         return url;
       }
 
-      editTrip = () => {
-        this.setState({ showStopModal: true});
-      }
-
-
       render() {
         let googleMapsUrl = this.determineUrl()
         let modalClose = () => this.setState({ showStopModal: false });
         let closeCityData = () => { this.setState({showCityData: false}) }
+        let editTrip = () => {this.setState({ showStopModal: true})}
+        let showHistory = () => {this.setState({showHistoryModal: true})}
+        let hideHistory = () => {this.setState({showHistoryModal: false})}
 
         return (
           <div>
             <div className="map" ref={this.GoogleMapsRef} />
-              <TripHistoryContainer />
+              <TripHistoryContainer show={this.state.showHistoryModal} hide={hideHistory}/>
               { this.state.loaded ? <GooglePlaces callbackStart={this.callbackStart} callbackEnd={this.callbackEnd} /> : null }
               { this.state.showCityData && <CityData cityData={this.state.tripData} hide={closeCityData} /> }
               { this.state.loaded ? 
@@ -227,12 +226,15 @@ class GoogleMap extends PolylineGenerator {
                 end={this.state.tripData.endLocation} 
                 callback={this.showDirections} /> 
                 : null }
-              { this.state.tripData.distance > 0 ? 
                 <div className="fix-right btn-group-vertical">
-                  <Button className="btn-social p-2 mb-2" onClick={this.editTrip} title="Edit Trip Data"><img className="img-button" src={timeImg} /></Button>
-                  <a className="btn btn-social p-2" target="_blank" href={googleMapsUrl} title="Export to Google Maps"><img className="img-button" src={googleMapsImg}></img></a> 
+                <Button className="btn-social p-2 mb-2" onClick={showHistory}>H</Button>
+                { this.state.tripData.distance > 0 &&
+                  <React.Fragment>
+                    <Button className="btn-social p-2 mb-2" onClick={editTrip} title="Edit Trip Data"><img className="img-button" src={timeImg} /></Button>
+                    <a className="btn btn-social p-2" target="_blank" href={googleMapsUrl} title="Export to Google Maps"><img className="img-button" src={googleMapsImg}></img></a> 
+                  </React.Fragment>
+                }
                 </div>
-                : null}
           </div>
         );
       }
