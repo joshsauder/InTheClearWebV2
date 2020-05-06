@@ -7,7 +7,7 @@ export default function PastStops({stop, selectStop}){
     let date = Math.floor((Date.now() - Date.parse(stop.createdAt)) / (1000 * 60 * 60 * 24))
 
     return(
-        <div className="HistoryDataContainer" onClick={() => selectStop(stop.tripId)}>
+        <div className="HistoryDataContainer" onClick={() => selectStop(stop.locations)}>
             <div className="HistoryDataGrid text-purple">
                 <div className="GridItem">{stop.locations[0].city} - {stop.locations[stop.locations.length - 1].city}</div>
                 <div className="GridItem">{date} days ago</div>
