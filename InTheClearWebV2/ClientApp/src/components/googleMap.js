@@ -11,6 +11,7 @@ import {connect} from "react-redux";
 import googleMapsImg from '../images/icons8-google-maps-48.png'
 import '../style/GoogleMaps.css'
 import timeImg from '../images/time.png'
+import TripHistoryContainer from './TripHistory/TripHistoryContainer';
 
 class GoogleMap extends PolylineGenerator {
 
@@ -215,6 +216,7 @@ class GoogleMap extends PolylineGenerator {
         return (
           <div>
             <div className="map" ref={this.GoogleMapsRef} />
+              <TripHistoryContainer />
               { this.state.loaded ? <GooglePlaces callbackStart={this.callbackStart} callbackEnd={this.callbackEnd} /> : null }
               { this.state.showCityData && <CityData cityData={this.state.tripData} hide={closeCityData} /> }
               { this.state.loaded ? 

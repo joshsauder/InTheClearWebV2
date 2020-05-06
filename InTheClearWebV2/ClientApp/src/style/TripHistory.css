@@ -1,0 +1,33 @@
+.HistoryDataContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 5px 0px 5px;
+}
+
+.HistoryDataGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    width: 100%;
+    padding: 10px 0px 10px 10px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.HistoryContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.TripTime{
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.GridItem {
+    width: 100%;
+}
+
+.HistoryDataContainer > img {
+    width: 60%;
+}

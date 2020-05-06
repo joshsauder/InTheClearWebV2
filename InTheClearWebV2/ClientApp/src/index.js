@@ -9,12 +9,17 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const store = createStore(rootReducer)
 
-ReactDOM.render(
-    <App store={store}/>
-    , document.getElementById('root')
-);
+const rootEl = document.getElementById('root')
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(<App store={store}/>, rootEl);
+
+if (module.hot) {
+    module.hot.accept('./App', () => {
+      const NextApp = require('./App').default
+      ReactDOM.render(
+        <NextApp store={store}/>,
+        rootEl
+      )
+    })
+}
+
