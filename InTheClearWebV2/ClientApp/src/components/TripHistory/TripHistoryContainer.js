@@ -13,7 +13,7 @@ function TripHistoryContainer() {
 
     useEffect(() => {
         Axios.get(`http://localhost:5000/api/Trip?id=${userId}`)
-        .then(res => setTrips(res.data))
+        .then(res => setTrips(res.data) )
     }, [])
 
     const tripSelected = (id) => {
