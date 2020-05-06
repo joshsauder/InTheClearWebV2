@@ -216,7 +216,7 @@ class GoogleMap extends PolylineGenerator {
         return (
           <div>
             <div className="map" ref={this.GoogleMapsRef} />
-              <TripHistoryContainer show={this.state.showHistoryModal} hide={hideHistory}/>
+              <TripHistoryContainer show={this.state.showHistoryModal} hide={hideHistory} showStop={(stop) => console.log(stop)}/>
               { this.state.loaded ? <GooglePlaces callbackStart={this.callbackStart} callbackEnd={this.callbackEnd} /> : null }
               { this.state.showCityData && <CityData cityData={this.state.tripData} hide={closeCityData} /> }
               { this.state.loaded ? 

@@ -5,20 +5,16 @@ import '../../style/TripHistory.css'
 import Axios from 'axios'
 import {useSelector} from 'react-redux'
 
-function TripHistoryContainer({show, hide}) {
+function TripHistoryContainer({show, hide, showStop}) {
     
     const [trips, setTrips] = useState([])
     const userId = useSelector(state => state.loginInfo.id)
-    console.log(userId)
 
+    //will need to add prop that adds any new trips to list
     useEffect(() => {
         Axios.get(`http://localhost:5000/api/Trip?id=${userId}`)
         .then(res => setTrips(res.data) )
     }, [])
-
-    const tripSelected = (id) => {
-        console.log(id)
-    }
 
     return(
         <Modal show={show} onHide={hide}>
@@ -27,7 +23,7 @@ function TripHistoryContainer({show, hide}) {
             </Modal.Header>
             <Modal.Body>
             <div className="HistoryContainer">
-                {trips.map(trip => <PastStops stop={trip} selectStop={tripSelected}/>)}
+                {trips.map(trip => <PastStops stop={trip} selectStop={showStop}/>)}
             </div>
             </Modal.Body>
         </Modal>
