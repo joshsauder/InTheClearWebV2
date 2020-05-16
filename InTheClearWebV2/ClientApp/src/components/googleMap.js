@@ -203,8 +203,17 @@ class GoogleMap extends PolylineGenerator {
         return url;
       }
 
-      showHistoryTrip = (stops) => {
+      showHistoryTrip = (trip) => {
+        let tripData = new TripsModel()
 
+        tripData.startLocation = { lat: trip.locations[0].latitude, lng: trip.locations[0].longitude }
+        tripData.endLocation = { lat: trip.locations[trip.locations.length - 1].latitude, lng: trip.locations[trip.locations.length - 1].longitude }
+
+        tripData.stops = trip.locations.maps(loc => {
+          return {lat: loc.latitude, lng: loc.longitude}
+        })
+
+        this.setState({tripData: tripData})
       }
 
       render() {
@@ -226,7 +235,7 @@ class GoogleMap extends PolylineGenerator {
                 show={this.state.showStopModal} 
                 hide={modalClose} 
                 start={this.state.tripData.startLocation} 
-                end={this.state.tripData.endLocation} 
+                end={this.state.tripData.endLocation}
                 callback={this.showDirections} /> 
                 : null }
                 <div className="fix-right btn-group-vertical">
