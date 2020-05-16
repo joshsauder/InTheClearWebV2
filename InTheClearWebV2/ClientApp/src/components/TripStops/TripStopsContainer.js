@@ -34,7 +34,7 @@ class TripStopsContainer extends Component {
             this.getTravelTimes()
         }
 
-        if(this.props.show && this.props.start !== prevProps.start || this.props.end !== prevProps.end){
+        if(this.props.show && this.props.trip.start !== prevProps.start || this.props.trip.end !== prevProps.end){
             this.setInitialState()
         }
 
@@ -47,7 +47,7 @@ class TripStopsContainer extends Component {
 
     setInitialState = () => {
         this.setState({
-            stops: [],
+            stops: this.props.trip.stops,
             minDate: [],
             travelTimes: [],
         })
@@ -61,7 +61,7 @@ class TripStopsContainer extends Component {
 
     getTravelTimes = () => {
         //get travel times
-        var data = [this.props.start, ...this.state.stops, this.props.end].map(trip => {
+        var data = [this.props.trip.start, ...this.state.stops, this.props.trip.end].map(trip => {
             return {
                 lat: trip.lat,
                 long: trip.lng,
@@ -126,7 +126,7 @@ class TripStopsContainer extends Component {
 
     onSubmit = () => {
         if(this.validateRoute()){
-            return this.props.callback([this.props.start, ...this.state.stops, this.props.end], this.state.date)
+            return this.props.callback([this.props.trip.start, ...this.state.stops, this.props.trip.end], this.state.date)
         } else {
             alert("Your trip cannot be longer than 6 days, and each leg (arrival - departure) cannot be longer than 48 hours.")
         }
@@ -167,8 +167,8 @@ class TripStopsContainer extends Component {
         return(
             <TripStopsModal show = {this.props.show} hide={this.props.hide} submit={this.onSubmit}>
                 <RouteDataView
-                    start={this.props.start}
-                    end={this.props.end}
+                    start={this.props.trip.start}
+                    end={this.props.trip.end}
                     stops={this.state.stops}
                     onSortEnd={this.onSortEnd}
                     handlePlacesRemove={this.handlePlacesRemove}

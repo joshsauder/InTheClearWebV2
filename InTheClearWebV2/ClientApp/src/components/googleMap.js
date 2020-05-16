@@ -234,8 +234,7 @@ class GoogleMap extends PolylineGenerator {
                 <TripStopsContainer 
                 show={this.state.showStopModal} 
                 hide={modalClose} 
-                start={this.state.tripData.startLocation} 
-                end={this.state.tripData.endLocation}
+                trip={this.state.tripData}
                 callback={this.showDirections} /> 
                 : null }
                 <div className="fix-right btn-group-vertical">
