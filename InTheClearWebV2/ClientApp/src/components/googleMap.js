@@ -78,9 +78,7 @@ class GoogleMap extends PolylineGenerator {
           disableDefaultUI: true,
         })
 
-      showModal(){
-        this.setState({showStopModal: true})
-      }
+      showModal = () => this.setState({showStopModal: true})
 
       async showDirections(stops, dates){
           this.setState({showStopModal: false, showCityData: true})
@@ -205,6 +203,10 @@ class GoogleMap extends PolylineGenerator {
         return url;
       }
 
+      showHistoryTrip = (stops) => {
+
+      }
+
       render() {
         let googleMapsUrl = this.determineUrl()
         let modalClose = () => this.setState({ showStopModal: false });
@@ -216,7 +218,7 @@ class GoogleMap extends PolylineGenerator {
         return (
           <div>
             <div className="map" ref={this.GoogleMapsRef} />
-              <TripHistoryContainer show={this.state.showHistoryModal} hide={hideHistory} showStop={(stop) => console.log(stop)}/>
+              <TripHistoryContainer show={this.state.showHistoryModal} hide={hideHistory} showStop={showHistoryTrip}/>
               { this.state.loaded ? <GooglePlaces callbackStart={this.callbackStart} callbackEnd={this.callbackEnd} /> : null }
               { this.state.showCityData && <CityData cityData={this.state.tripData} hide={closeCityData} /> }
               { this.state.loaded ? 
