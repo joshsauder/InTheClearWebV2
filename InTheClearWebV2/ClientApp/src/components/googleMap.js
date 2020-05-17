@@ -206,11 +206,11 @@ class GoogleMap extends PolylineGenerator {
       showHistoryTrip = (trip) => {
         let tripData = new TripsModel()
 
-        tripData.startLocation = { lat: trip.locations[0].latitude, lng: trip.locations[0].longitude }
-        tripData.endLocation = { lat: trip.locations[trip.locations.length - 1].latitude, lng: trip.locations[trip.locations.length - 1].longitude }
+        tripData.startLocation = { lat: trip.locations[0].latitude, lng: trip.locations[0].longitude, name: trip.locations[0].city }
+        tripData.endLocation = { lat: trip.locations[trip.locations.length - 1].latitude, lng: trip.locations[trip.locations.length - 1].longitude, name: trip.locations[trip.locations.length - 1].city }
 
-        tripData.stops = trip.locations.maps(loc => {
-          return {lat: loc.latitude, lng: loc.longitude}
+        tripData.stops = trip.locations.slice(1, trip.locations.length-1).map(loc => {
+          return {lat: loc.latitude, lng: loc.longitude, name: loc.city}
         })
 
         this.setState({tripData: tripData})
@@ -227,7 +227,7 @@ class GoogleMap extends PolylineGenerator {
         return (
           <div>
             <div className="map" ref={this.GoogleMapsRef} />
-              <TripHistoryContainer show={this.state.showHistoryModal} hide={hideHistory} showStop={showHistoryTrip}/>
+              <TripHistoryContainer show={this.state.showHistoryModal} hide={hideHistory} showStop={this.showHistoryTrip}/>
               { this.state.loaded ? <GooglePlaces callbackStart={this.callbackStart} callbackEnd={this.callbackEnd} /> : null }
               { this.state.showCityData && <CityData cityData={this.state.tripData} hide={closeCityData} /> }
               { this.state.loaded ? 
