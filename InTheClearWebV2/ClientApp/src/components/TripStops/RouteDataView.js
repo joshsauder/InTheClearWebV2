@@ -73,7 +73,7 @@ class RouteDataView extends Component {
                     <Flatpickr data-enable-time
                     className="ml-1"
                     value={this.props.date[0]}
-                    onChange={date => {this.handleDate(date)}} />
+                    onChange={date => {this.props.handleDate(date)}} />
                 </div>
                 <SortableList
                     items={this.props.stops}

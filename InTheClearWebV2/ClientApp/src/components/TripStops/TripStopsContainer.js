@@ -36,6 +36,7 @@ class TripStopsContainer extends Component {
         }
 
         if(this.props.show && this.props.trip.startLocation !== prevProps.trip.startLocation || this.props.trip.endLocation !== prevProps.trip.endLocation){
+            this.setInitialDate()
             this.setInitialState()
         }
 

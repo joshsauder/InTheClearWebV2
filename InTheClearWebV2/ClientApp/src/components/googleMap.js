@@ -215,7 +215,7 @@ class GoogleMap extends PolylineGenerator {
           return {lat: loc.latitude, lng: loc.longitude, name: loc.city}
         })
 
-        this.setState({tripData: tripData, showHistoryModal: false})
+        this.setState({tripData: tripData, showHistoryModal: false, showCityData: false})
       }
 
       render() {
