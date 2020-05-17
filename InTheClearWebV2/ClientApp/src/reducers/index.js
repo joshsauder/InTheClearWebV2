@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 const initialState = {
     id: "",
     name: "",
+    email: "",
     paid: ""
 }
 

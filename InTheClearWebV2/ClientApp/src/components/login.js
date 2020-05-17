@@ -8,6 +8,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import {options} from '../services/authSetup';
 import { connect } from 'react-redux'
 import {setLoginInfo} from '../actions'
+import {mapStatetoProps} from '../container/loginContainer'
 
 export class Login extends Component {
 
@@ -44,11 +45,12 @@ export class Login extends Component {
         Axios.defaults.headers.common['Authorization'] = "Bearer " + token
 
         if(this.props.email === userObj.email){
-            Axios.get('/api/User/paid')
+            Axios.get(`/api/User/Paid?userId=${this.props.id}`)
             .then(res => {
-
-            })
-
+                let paid = res.status === 200 ? true : false
+                this.props.dispatch(setLoginInfo({...this.props, paid: paid}))
+                this.props.history.push("/")
+            }).catch(err => alert("There was an issue signing you up! Please try again."))
         }else {
             Axios.post('/api/User/Auth', userObj)
             .then(res => {
@@ -63,7 +65,7 @@ export class Login extends Component {
                 } else {
                     alert("There was an issue signing you up! Please try again.")
                 }
-            }).catch(err => console.log(err))
+            }).catch(err => alert("There was an issue signing you up! Please try again."))
         }
     }
 
@@ -92,4 +94,4 @@ export class Login extends Component {
     }
 } 
 
-export default connect()(Login)
+export default connect(mapStatetoProps)(Login)
