@@ -240,7 +240,9 @@ class GoogleMap extends PolylineGenerator {
                 callback={this.showDirections} /> 
                 : null }
                 <div className="fix-right btn-group-vertical">
-                <Button className="btn-social p-2 mb-2" onClick={showHistory}><img className="img-button" src={timeImg}></img></Button>
+                {this.props.paid && 
+                  <Button className="btn-social p-2 mb-2" onClick={showHistory} rel="Trip History"><img className="img-button" src={timeImg}></img></Button>
+                }
                 { this.state.tripData.distance > 0 &&
                   <React.Fragment>
                     <Button className="btn-social p-2 mb-2" onClick={editTrip} title="Edit Trip Data"><img className="img-button" src={listImg} /></Button>
