@@ -5,6 +5,7 @@
     margin: 10px 15px 10px 15px;
     background-color: white;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .HistoryDataGrid {
