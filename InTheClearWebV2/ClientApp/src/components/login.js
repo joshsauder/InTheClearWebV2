@@ -42,27 +42,30 @@ export class Login extends Component {
 
         //Set Auth Token as Global
         Axios.defaults.headers.common['Authorization'] = "Bearer " + token
-        
-        Axios.post('/api/User/Auth', userObj)
-        .then(res => {
-            if(res.status == 200){
-                //send to redux
-                this.props.dispatch(setLoginInfo(res.data))
-                this.props.history.push("/")
 
-                //if current user is not paid, remove from firebase
-                //cost saving...
-                if(res.data.paid == false){
-                    firebase.auth().currentUser.delete()
+        if(this.props.email === userObj.email){
+            Axios.get('/api/User/paid')
+            .then(res => {
+
+            })
+
+        }else {
+            Axios.post('/api/User/Auth', userObj)
+            .then(res => {
+                if(res.status == 200){
+                    //send to redux
+                    this.props.dispatch(setLoginInfo(res.data))
+                    this.props.history.push("/")
+
+                    //if current user is not paid, remove from firebase
+                    //cost saving...
+                    if(res.data.paid == false){ firebase.auth().currentUser.delete() }
+                } else {
+                    alert("There was an issue signing you up! Please try again.")
                 }
-            } else {
-                alert("There was an issue signing you up! Please try again.")
-            }
-        }).catch(err => {
-            console.log(err)
-        })
+            }).catch(err => console.log(err))
+        }
     }
-
 
     render(){
 

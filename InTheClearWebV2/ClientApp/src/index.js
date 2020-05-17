@@ -4,10 +4,16 @@ import { createStore } from 'redux'
 import './index.css';
 import App from './App';
 import rootReducer from "./reducers"
-import * as serviceWorker from './serviceWorker';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-const store = createStore(rootReducer)
+//persist state to user info to localstorage
+const persistedState = localStorage.getItem('userState') ? JSON.parse(localStorage.getItem('userState')) : {}
+const store = createStore(rootReducer, persistedState)
+
+//subscribe and update localstore if change in redux state
+store.subscribe(() => {
+  localStorage.setItem('userState', JSON.stringify(store.getState()))
+}) 
 
 const rootEl = document.getElementById('root')
 
