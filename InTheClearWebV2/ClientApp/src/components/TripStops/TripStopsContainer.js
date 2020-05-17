@@ -15,7 +15,8 @@ class TripStopsContainer extends Component {
             stops: [],
             date: [],
             minDate: [],
-            travelTimes: []
+            travelTimes: [],
+            loadingTimes: false
         }
 
     }
@@ -23,6 +24,9 @@ class TripStopsContainer extends Component {
     componentDidUpdate(prevProps, prevState){
 
         if(this.props.show == true && this.state.date.length === 0){
+            //set initial date state
+            this.setInitialDate()
+
             //add listener to input
             this.stopInput = document.getElementById('stopLocation');
             this.autocompleteStop = new window.google.maps.places.Autocomplete(this.stopInput);
@@ -43,20 +47,23 @@ class TripStopsContainer extends Component {
     }
 
     setInitialState = () => {
+        this.setState({
+            stops: this.props.trip.stops,
+            minDate: [],
+            travelTimes: []
+        })
+    }
+
+    setInitialDate = () =>{
         let dates = [new Date()]
         for(var i = 0; i < this.props.trip.stops.length; i++){
             dates.push(new Date())
         }
-
-        this.setState({
-            stops: this.props.trip.stops,
-            minDate: [],
-            travelTimes: [],
-            date: dates
-        })
+        this.setState({date: dates})
     }
 
     getTravelTimes = () => {
+        this.setState({loadingTimes: true})
         //get travel times
         var data = [this.props.trip.startLocation, ...this.state.stops, this.props.trip.endLocation].map(trip => {
             return {
@@ -70,10 +77,8 @@ class TripStopsContainer extends Component {
             const times = res.data.map(time => {
                 return time.time
             });
-            this.setState({travelTimes: times})
+            this.setState({travelTimes: times, loadingTimes: false})
             this.determineTravelTimes()
-        }).catch(err => {
-            console.log(err)
         })
     }
 
@@ -124,7 +129,7 @@ class TripStopsContainer extends Component {
 
     onSubmit = () => {
         if(this.validateRoute()){
-            return this.props.callback([this.props.trip.startLocation, ...this.state.stops, this.props.trip.endLocation], this.state.date)
+            return this.props.callback(this.state.stops, this.state.date)
         } else {
             alert("Your trip cannot be longer than 6 days, and each leg (arrival - departure) cannot be longer than 48 hours.")
         }
@@ -163,7 +168,7 @@ class TripStopsContainer extends Component {
 
     render(){
         return(
-            <TripStopsModal show = {this.props.show} hide={this.props.hide} submit={this.onSubmit}>
+            <TripStopsModal show = {this.props.show} hide={this.props.hide} submit={this.onSubmit} loading={this.state.loadingTimes}>
                 <RouteDataView
                     start={this.props.trip.startLocation}
                     end={this.props.trip.endLocation}

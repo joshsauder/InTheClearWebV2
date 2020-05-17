@@ -97,8 +97,9 @@ class GoogleMap extends PolylineGenerator {
           tripData.stops = [...stops]
 
           //get directions with times
-          var directionsData = await this.createPolylineAndWeatherData(stops, this.googleMaps, bounds, dates)
-  
+          const polylineStops = [tripData.startLocation, ...stops, tripData.endLocation]
+          var directionsData = await this.createPolylineAndWeatherData(polylineStops, this.googleMaps, bounds, dates)
+
           this.googleMaps.fitBounds(directionsData[0])
 
           //set trip data
@@ -107,7 +108,7 @@ class GoogleMap extends PolylineGenerator {
           tripData.distance = directionsData[3]
 
           //if paid, save stops
-          if(this.props.paid == true){ this.postStops(tripData) }
+          if(this.props.paid == true){ console.log(tripData) }
           this.setState({
             tripData: tripData
           })
@@ -119,7 +120,8 @@ class GoogleMap extends PolylineGenerator {
         //save each stop
         //need to use forEach in the small case the trip does not exist (unincorperated towns).
         const data = []
-        tripData.stops.forEach(stop => {
+        const stops = [tripData.startLocation, ...tripData.stops, tripData.endLocation]
+        stops.forEach(stop => {
           //get first occurance
           let trip = tripData.tripData.filter(trip =>{
             return String(trip.city).indexOf(String(stop.name)) > -1
@@ -213,7 +215,7 @@ class GoogleMap extends PolylineGenerator {
           return {lat: loc.latitude, lng: loc.longitude, name: loc.city}
         })
 
-        this.setState({tripData: tripData})
+        this.setState({tripData: tripData, showHistoryModal: false})
       }
 
       render() {
@@ -228,7 +230,7 @@ class GoogleMap extends PolylineGenerator {
           <div>
             <div className="map" ref={this.GoogleMapsRef} />
               <TripHistoryContainer show={this.state.showHistoryModal} hide={hideHistory} showStop={this.showHistoryTrip}/>
-              { this.state.loaded ? <GooglePlaces callbackStart={this.callbackStart} callbackEnd={this.callbackEnd} /> : null }
+              { this.state.loaded && <GooglePlaces callbackStart={this.callbackStart} callbackEnd={this.callbackEnd} />  }
               { this.state.showCityData && <CityData cityData={this.state.tripData} hide={closeCityData} /> }
               { this.state.loaded ? 
                 <TripStopsContainer 

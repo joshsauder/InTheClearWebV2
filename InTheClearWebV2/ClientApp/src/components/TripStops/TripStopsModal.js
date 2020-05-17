@@ -14,7 +14,7 @@ export default function TripStopsModal(props){
             {props.children}
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.submit}>Set Stops</Button>
+                <Button onClick={props.submit} disabled={props.loading}>Set Stops</Button>
             </Modal.Footer>
         </Modal>
     )
