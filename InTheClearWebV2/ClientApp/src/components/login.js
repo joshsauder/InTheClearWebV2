@@ -34,7 +34,6 @@ export class Login extends Component {
     }
 
     submitNewUser = (attributes, token) => {      
-
         const userObj = {
             displayName: attributes.displayName,
             email: attributes.email,

@@ -1,11 +1,11 @@
 import React from 'react'
-import danger from '../../images/danger.png'
 
 export default function PastStops({stop, selectStop}){
 
     //ms * sec * min * hour
     let date = Math.floor((Date.now() - Date.parse(stop.createdAt)) / (1000 * 60 * 60 * 24))
-    let url = `https://maps.googleapis.com/maps/api/staticmap?size=600x300&markers=color:red%7C${stop.locations[0].latitude},${stop.locations[0].longitude}&markers=color:red%7C${stop.locations[stop.locations.length - 1].latitude},${stop.locations[stop.locations.length - 1].longitude}&key=AIzaSyDjPZPz3Vv3KYdlkJ7ErdSVfpO2E707w0k`
+    //API key whitelisted
+    let url = `https://image.maps.ls.hereapi.com/mia/1.6/mapview?apiKey=${process.env.REACT_APP_HERE_MAPS}&w=600&h=300&z=12&f=0&poi=${stop.locations[0].latitude},${stop.locations[0].longitude},${stop.locations[stop.locations.length - 1].latitude},${stop.locations[stop.locations.length - 1].longitude}&poilbl=1&poitxs=18&poifc=ff0000`
     return(
         <div className="HistoryDataContainer" onClick={() => selectStop(stop)}>
             <div className="HistoryDataGrid text-purple">
