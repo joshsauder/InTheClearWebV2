@@ -48,5 +48,20 @@ namespace InTheClearWebV2.Controllers
                 return Unauthorized(e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("Paid")]
+        [Authorize]
+        public IActionResult CheckPaid(Guid userId)
+        {
+            var paid = service.CheckPaid(userId);
+
+            if(!paid)
+            {
+                return NotFound(); 
+            }
+
+            return Ok();
+        }
     }
 }

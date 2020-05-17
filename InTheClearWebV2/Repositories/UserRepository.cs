@@ -27,7 +27,7 @@ namespace InTheClearWebV2.Repositories
                 .SingleOrDefault(user => user.Email == email);
         }
 
-        public void updatePaid(string email)
+        public void UpdatePaid(string email)
         {
             var query = 
                 (from user in context.Users
@@ -36,6 +36,13 @@ namespace InTheClearWebV2.Repositories
             query.Paid = true;
 
             context.SaveChanges();
+        }
+
+        public bool CheckPaid(Guid userId)
+        {
+            return (from user in context.Users
+                where user.Id == userId
+                select user.Paid).First();
         }
     }
 }

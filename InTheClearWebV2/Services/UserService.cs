@@ -20,6 +20,11 @@ namespace InTheClearWebV2.Services
             return FindUser(user);
         }
 
+        public bool CheckPaid(Guid userId)
+        {
+            return repository.CheckPaid(userId);
+        }
+
         private UserResponse FindUser(User user)
         {
             var foundUser = repository.FindUser(user.Email);
@@ -41,7 +46,7 @@ namespace InTheClearWebV2.Services
 
             if(user.Paid == true && foundUser.Paid == false){
                 foundUser.Paid = true;
-                repository.updatePaid(user.Email);
+                repository.UpdatePaid(user.Email);
             }
         }
 
