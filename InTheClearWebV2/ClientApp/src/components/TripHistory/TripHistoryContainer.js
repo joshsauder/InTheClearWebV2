@@ -23,7 +23,7 @@ function TripHistoryContainer({show, hide, showStop}) {
             </Modal.Header>
             <Modal.Body>
             <div className="HistoryContainer">
-                {trips.map(trip => <PastStops stop={trip} selectStop={showStop}/>)}
+                {trips.map((trip, index) => <PastStops stop={trip} selectStop={showStop} key={index} />)}
             </div>
             </Modal.Body>
         </Modal>
