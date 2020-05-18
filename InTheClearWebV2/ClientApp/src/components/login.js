@@ -7,8 +7,8 @@ import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import {options} from '../services/authSetup';
 import { connect } from 'react-redux'
-import {setLoginInfo} from '../actions'
-import {mapStatetoProps} from '../container/loginContainer'
+import {setLoginInfo} from '../redux/actions'
+import {mapStatetoProps} from '../redux/container/loginContainer'
 
 export class Login extends Component {
 

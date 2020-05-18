@@ -1,5 +1,5 @@
-import * as actions from '../actions/index'
-import reducer from '../reducers/index'
+import * as actions from '../redux/actions/index'
+import reducer from '../redux/reducers/index'
 
 describe('Login Redux', () => {
 

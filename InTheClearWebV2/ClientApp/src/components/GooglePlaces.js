@@ -5,8 +5,8 @@ import '../App.css';
 import '../style/GooglePlaces.css';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import {connect} from "react-redux";
-import {mapStatetoProps} from '../container/loginContainer'
-import {setLoginInfo} from '../actions'
+import {mapStatetoProps} from '../redux/container/loginContainer'
+import {setLoginInfo} from '../redux/actions'
 import logo from '../images/InTheClear.png';
 import Axios from 'axios';
 import firebase from 'firebase/app'

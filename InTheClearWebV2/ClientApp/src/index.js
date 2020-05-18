@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux'
 import './index.css';
 import App from './App';
-import rootReducer from "./reducers"
+import rootReducer from "./redux/reducers"
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 //persist state to user info to localstorage

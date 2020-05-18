@@ -4,7 +4,7 @@ import PolylineGenerator from './PolylineGenerator';
 import CityData from './CityData';
 import TripStopsContainer from './TripStops/TripStopsContainer';
 import {TripsModel} from '../models/trips';
-import {mapStatetoProps} from '../container/loginContainer'
+import {mapStatetoProps} from '../redux/container/loginContainer'
 import {Button} from 'react-bootstrap'
 import Axios from 'axios';
 import {connect} from "react-redux";
