@@ -58,6 +58,7 @@ class RouteDataView extends Component {
     constructor(props){
         super(props)
     }
+    
 
     //cant pass start and end to sortable list since these items will not be able to be sorted
     render(){
@@ -91,7 +92,7 @@ class RouteDataView extends Component {
                 </div>
                 }
                 <div className="row mt-5">
-                    <input className="form-control" id="stopLocation" type="text" size="50" placeholder="Add Trip Stop" autoComplete="on" runat="server" />
+                    <input className="form-control" id="stopLocation" ref={this.props.inputRef} type="text" size="50" placeholder="Add Trip Stop" autoComplete="on" runat="server" />
                 </div>
             </div>
         )

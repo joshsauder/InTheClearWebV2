@@ -10,33 +10,29 @@ class TripStopsContainer extends Component {
 
     constructor(props){
         super(props)
-
         this.state = {
             stops: [],
             date: [],
             minDate: [],
             travelTimes: [],
-            loadingTimes: false
+            loadingTimes: false,
+            locationRef: undefined
         }
-
     }
+    
 
     componentDidUpdate(prevProps, prevState){
 
         if(this.props.show == true && this.state.date.length === 0){
             //set initial date state
             this.setInitialDate()
-
-            //add listener to input
-            this.stopInput = document.getElementById('stopLocation');
-            this.autocompleteStop = new window.google.maps.places.Autocomplete(this.stopInput);
-            window.google.maps.event.addListener(this.autocompleteStop, 'place_changed', this.handlePlacesStopSelect)
             //get inital travel times
             this.getTravelTimes()
         }
 
         if(this.props.show && this.props.trip.startLocation !== prevProps.trip.startLocation || this.props.trip.endLocation !== prevProps.trip.endLocation){
             this.setInitialDate()
+            //reset to init state
             this.setInitialState()
         }
 
@@ -166,6 +162,13 @@ class TripStopsContainer extends Component {
         this.getTravelTimes()
     }
 
+    setRef = (ref) => {
+        this.stopInput = ref
+        //add listener to input
+        this.autocompleteStop = new window.google.maps.places.Autocomplete(this.stopInput);
+        window.google.maps.event.addListener(this.autocompleteStop, 'place_changed', this.handlePlacesStopSelect)
+    }
+
 
     render(){
         return(
@@ -179,6 +182,7 @@ class TripStopsContainer extends Component {
                     date={this.state.date}
                     minDate={this.state.minDate}
                     handleDate={this.handleDate}
+                    inputRef={this.setRef}
                 />                     
             </TripStopsModal>
         )
