@@ -1,10 +1,28 @@
 import React from 'react'
 
 export default function PastStops({stop, selectStop}){
+    const stopsURLString = () => {
+        let stopString = ""
+        stop.locations.forEach((loc, index) => {
+            stopString += `&poix${index}=${loc.latitude},${loc.longitude};`
+            if(index === 0 || index === stop.locations.length - 1){
+                //Char code 65 = 'A'
+                stopString += `red;white;20;${String.fromCharCode(index+65)}`
+            }else {
+                stopString += `green;white;20;${String.fromCharCode(index+65)}`
+            }
+        })
+
+        return stopString
+    }
+
     //ms * sec * min * hour
     let date = Math.floor((Date.now() - Date.parse(stop.createdAt)) / (1000 * 60 * 60 * 24))
     //API key whitelisted
-    let url = `https://image.maps.ls.hereapi.com/mia/1.6/mapview?apiKey=${process.env.REACT_APP_HERE_MAPS}&w=600&h=300&z=12&f=0&poi=${stop.locations[0].latitude},${stop.locations[0].longitude},${stop.locations[stop.locations.length - 1].latitude},${stop.locations[stop.locations.length - 1].longitude}&poilbl=1&poitxs=18&poifc=ff0000`
+    let url = `https://image.maps.ls.hereapi.com/mia/1.6/mapview?apiKey=${process.env.REACT_APP_HERE_MAPS}&w=600&h=300&z=12&f=0` + 
+            stopsURLString() + "&poitxs=18"
+
+    
 
     const determineStops = () => {
         if(stop.locations.length > 2){
