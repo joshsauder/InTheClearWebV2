@@ -230,7 +230,7 @@ class GoogleMap extends PolylineGenerator {
           <div>
             <div className="map" ref={this.GoogleMapsRef} />
               <TripHistoryContainer show={this.state.showHistoryModal} hide={hideHistory} showStop={this.showHistoryTrip}/>
-              { this.state.loaded && <GooglePlaces callbackStart={this.callbackStart} callbackEnd={this.callbackEnd} />  }
+              { this.state.loaded && <GooglePlaces start={this.state.tripData.startLocation} end={this.state.tripData.endLocation} callbackStart={this.callbackStart} callbackEnd={this.callbackEnd} />  }
               { this.state.showCityData && <CityData cityData={this.state.tripData} hide={closeCityData} /> }
               { this.state.loaded ? 
                 <TripStopsContainer 

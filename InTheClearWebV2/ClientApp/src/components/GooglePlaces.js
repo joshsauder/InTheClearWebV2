@@ -35,14 +35,13 @@ class GooglePlaces extends Component {
 
       componentDidMount(){
           
-          var startInput = document.getElementById('locationStart');
-          var destinationInput = document.getElementById('locationEnd')
+          this.startInput = document.getElementById('locationStart');
+          this.destinationInput = document.getElementById('locationEnd')
 
-          this.autocompleteStart = new window.google.maps.places.Autocomplete(startInput);
-          this.autocompleteDest = new window.google.maps.places.Autocomplete(destinationInput);
+          this.autocompleteStart = new window.google.maps.places.Autocomplete(this.startInput);
+          this.autocompleteDest = new window.google.maps.places.Autocomplete(this.destinationInput);
 
           window.google.maps.event.addListener(this.autocompleteStart, 'place_changed', this.handlePlacesStartSelect)
-
           window.google.maps.event.addListener(this.autocompleteDest, 'place_changed', this.handlePlacesEndSelect)
 
       }
@@ -55,14 +54,20 @@ class GooglePlaces extends Component {
             this.props.callbackEnd(this.state.endCoordinates);
         }
 
+        if(this.props.end !== prevProps.end || this.props.start !== prevProps.start){
+            this.startInput.value = this.props.start.name
+            this.destinationInput.value = this.props.end.name
+        }
+
       }
 
       handlePlacesStartSelect = () => {
 
         var placeStart = this.autocompleteStart.getPlace();
+        console.log(placeStart)
         var lat = placeStart.geometry.location.lat();
         var long = placeStart.geometry.location.lng();
-        this.setState({startCoordinates:{lat: lat, lng: long, name: placeStart.name}})
+        this.setState({startCoordinates:{lat: lat, lng: long, name: placeStart.formatted_address}})
 
       }
 
@@ -71,7 +76,7 @@ class GooglePlaces extends Component {
         var placeEnd = this.autocompleteDest.getPlace();
         var lat = placeEnd.geometry.location.lat();
         var long =  placeEnd.geometry.location.lng();
-        this.setState({endCoordinates:{lat: lat, lng: long, name: placeEnd.name}})
+        this.setState({endCoordinates:{lat: lat, lng: long, name: placeEnd.formatted_address}})
 
       }
 
