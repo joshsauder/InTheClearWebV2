@@ -64,7 +64,6 @@ class GooglePlaces extends Component {
       handlePlacesStartSelect = () => {
 
         var placeStart = this.autocompleteStart.getPlace();
-        console.log(placeStart)
         var lat = placeStart.geometry.location.lat();
         var long = placeStart.geometry.location.lng();
         this.setState({startCoordinates:{lat: lat, lng: long, name: placeStart.formatted_address}})

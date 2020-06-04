@@ -124,7 +124,7 @@ class GoogleMap extends PolylineGenerator {
         stops.forEach(stop => {
           //get first occurance
           let trip = tripData.tripData.filter(trip =>{
-            return String(trip.city).indexOf(String(stop.name)) > -1
+            return String(stop.name).indexOf(String(trip.city)) > -1 || String(trip.city).indexOf(String(stop.name)) > -1
           })[0]
           if(trip){
             data.push(
@@ -206,10 +206,10 @@ class GoogleMap extends PolylineGenerator {
       }
 
       showHistoryTrip = (trip) => {
-        let tripData = new TripsModel()
+        this.callbackStart({ lat: trip.locations[0].latitude, lng: trip.locations[0].longitude, name: trip.locations[0].city })
+        this.callbackEnd({ lat: trip.locations[trip.locations.length - 1].latitude, lng: trip.locations[trip.locations.length - 1].longitude, name: trip.locations[trip.locations.length - 1].city })
 
-        tripData.startLocation = { lat: trip.locations[0].latitude, lng: trip.locations[0].longitude, name: trip.locations[0].city }
-        tripData.endLocation = { lat: trip.locations[trip.locations.length - 1].latitude, lng: trip.locations[trip.locations.length - 1].longitude, name: trip.locations[trip.locations.length - 1].city }
+        let tripData = {...this.state.tripData}
 
         tripData.stops = trip.locations.slice(1, trip.locations.length-1).map(loc => {
           return {lat: loc.latitude, lng: loc.longitude, name: loc.city}

@@ -22,7 +22,6 @@ export default function PastStops({stop, selectStop}){
     let url = `https://image.maps.ls.hereapi.com/mia/1.6/mapview?apiKey=${process.env.REACT_APP_HERE_MAPS}&w=600&h=300&z=12&f=0` + 
             stopsURLString() + "&poitxs=18"
 
-    
 
     const determineStops = () => {
         if(stop.locations.length > 2){
