@@ -206,6 +206,7 @@ class GoogleMap extends PolylineGenerator {
       }
 
       showHistoryTrip = (trip) => {
+        //update start and end markers and tripdata object data
         this.callbackStart({ lat: trip.locations[0].latitude, lng: trip.locations[0].longitude, name: trip.locations[0].city })
         this.callbackEnd({ lat: trip.locations[trip.locations.length - 1].latitude, lng: trip.locations[trip.locations.length - 1].longitude, name: trip.locations[trip.locations.length - 1].city })
 
