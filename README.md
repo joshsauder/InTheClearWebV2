@@ -1,6 +1,7 @@
 # In The Clear Web App
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![CodeFactor](https://www.codefactor.io/repository/github/joshsauder/intheclearwebv2/badge)](https://www.codefactor.io/repository/github/joshsauder/intheclearwebv2)
 
 A web-app that gives the user all the features of the [iOS App](https://itunes.apple.com/us/app/in-the-clear/id1458058092?ls=1&mt=8). This app has been released and can be viewed at [https://app.intheclearapp.com](https://app.intheclearapp.com). It was deployed using AWS ECS, and the AWS Application Load Balancer
 
